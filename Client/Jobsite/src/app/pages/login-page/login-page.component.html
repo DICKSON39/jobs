@@ -1,0 +1,36 @@
+<div class="login-wrapper">
+  <div class="login-box">
+    <h2>Welcome back</h2>
+    <p>Please enter your details to sign in</p>
+
+    <form [formGroup]="form2"(ngSubmit)="onSubmit()">
+      <label>Email</label>
+      <input type="email"  placeholder="Enter your email" formControlName="email" />
+      <div *ngIf="!form2.controls.email?.valid &&(form2.controls.email.touched)">
+       <p *ngIf="!form2.controls.email.errors?.['required']">email is allowed</p>
+        <p *ngIf="!form2.controls.email.errors?.['unAllowedNames']">email is not allowed</p>
+      </div>
+
+      <label>Password</label>
+      <div class="password-field">
+        <input  placeholder="Enter your password" type="password" formControlName="password"/>
+        <div *ngIf="!form2.controls.password?.valid &&(form2.controls.password.touched)">
+          <p>Password is required</p>
+        </div>
+        
+      </div>
+
+      <div class="options">
+        <label>
+          <input type="checkbox" formControlName="remember" />
+          Remember me
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button class="submit-button" type="submit" [disabled]="!form2.valid"  (click)="navigateToAdmin()">Sign in</button>
+    </form>
+
+    <p class="signup">Don't have an account? <a (click)="navigateToRegister()">Sign up</a></p>
+  </div>
+</div>

@@ -1,0 +1,270 @@
+body {
+    font-family: sans-serif;
+    margin: 10px; /* Adjust overall margin for smaller screens */
+    background-color: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .container {
+    max-width: 100%; /* Make container full width on smaller screens */
+    margin: 10px auto; /* Add top/bottom margin */
+    background-color: #fff;
+    padding: 15px; /* Adjust padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .header {
+    margin-bottom: 15px; /* Adjust margin */
+    color: #333;
+    padding: 15px; /* Adjust padding */
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .header h2 {
+    margin-top: 0;
+    font-size: 1.5em; /* Adjust font size */
+  }
+  
+  .header p {
+    color: #777;
+    font-size: 0.9em; /* Adjust font size */
+    margin-bottom: 10px; /* Adjust margin */
+  }
+  
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust minmax */
+    gap: 15px; /* Adjust gap */
+    margin-bottom: 15px; /* Adjust margin */
+  }
+  
+  .kpi-card {
+    background-color: #f9f9f9;
+    padding: 10px; /* Adjust padding */
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+  
+  .kpi-title {
+    font-size: 0.9em; /* Adjust font size */
+    color: #777;
+    margin-bottom: 3px; /* Adjust margin */
+  }
+  
+  .kpi-value {
+    font-size: 1.2em; /* Adjust font size */
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 3px; /* Adjust gap */
+  }
+  
+  .kpi-trend {
+    font-size: 0.8em; /* Adjust font size */
+    color: #28a745; /* Example positive trend color */
+  }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack charts on smaller screens */
+    gap: 15px; /* Adjust gap */
+    margin-bottom: 15px; /* Adjust margin */
+  }
+  
+  .chart-card {
+    background-color: #f9f9f9;
+    padding: 10px; /* Adjust padding */
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+  
+  .chart-title {
+    font-size: 1em; /* Adjust font size */
+    color: #333;
+    margin-bottom: 8px; /* Adjust margin */
+  }
+  
+  .bar-chart {
+    height: 100px; /* Adjust height */
+    background-color: #e0f7fa; /* Placeholder */
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 5px; /* Adjust padding */
+  }
+  
+  .bar {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 3px; /* Adjust padding */
+    font-size: 0.7em; /* Adjust font size */
+    border-radius: 3px 3px 0 0;
+  }
+  
+  .system-health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust minmax */
+    gap: 15px; /* Adjust gap */
+  }
+  
+  .health-card {
+    background-color: #f9f9f9;
+    padding: 10px; /* Adjust padding */
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+  
+  .health-title {
+    font-size: 0.9em; /* Adjust font size */
+    color: #777;
+    margin-bottom: 3px; /* Adjust margin */
+  }
+  
+  .health-value {
+    font-size: 1.1em; /* Adjust font size */
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Media query for small devices (up to 600px) */
+  @media (max-width: 600px) {
+    .header {
+      padding: 10px;
+    }
+  
+    .header h2 {
+      font-size: 1.3em;
+    }
+  
+    .header p {
+      font-size: 0.8em;
+    }
+  
+    .kpi-grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+    }
+  
+    .kpi-card {
+      padding: 8px;
+    }
+  
+    .kpi-title {
+      font-size: 0.8em;
+    }
+  
+    .kpi-value {
+      font-size: 1em;
+    }
+  
+    .charts-grid {
+      grid-template-columns: 1fr; /* Stack charts */
+      gap: 10px;
+    }
+  
+    .chart-title {
+      font-size: 0.9em;
+    }
+  
+    .bar-chart {
+      height: 80px;
+    }
+  
+    .bar {
+      font-size: 0.6em;
+      padding: 2px;
+    }
+  
+    .system-health-grid {
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 10px;
+    }
+  
+    .health-card {
+      padding: 8px;
+    }
+  
+    .health-title {
+      font-size: 0.8em;
+    }
+  
+    .health-value {
+      font-size: 1em;
+    }
+  }
+  
+  /* Media query for slightly larger small devices (up to 768px) */
+  @media (min-width: 601px) and (max-width: 768px) {
+    .header h2 {
+      font-size: 1.8em;
+    }
+  
+    .header p {
+      font-size: 0.95em;
+    }
+  
+    .kpi-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+  
+    .kpi-card {
+      padding: 12px;
+    }
+  
+    .kpi-title {
+      font-size: 0.95em;
+    }
+  
+    .kpi-value {
+      font-size: 1.4em;
+    }
+  
+    .charts-grid {
+      grid-template-columns: 1fr; /* Stack charts on smaller tablets too */
+      gap: 18px;
+    }
+  
+    .chart-title {
+      font-size: 1.1em;
+    }
+  
+    .bar-chart {
+      height: 120px;
+    }
+  
+    .bar {
+      font-size: 0.7em;
+      padding: 4px;
+    }
+  
+    .system-health-grid {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 18px;
+    }
+  
+    .health-card {
+      padding: 12px;
+    }
+  
+    .health-title {
+      font-size: 0.95em;
+    }
+  
+    .health-value {
+      font-size: 1.2em;
+    }
+  }

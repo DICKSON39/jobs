@@ -1,0 +1,117 @@
+.notifications-container {
+    background-color: #f9f9f9; /* Example background */
+    border: 1px solid #ddd; /* Example border */
+    border-radius: 8px; /* Example rounded corners */
+    padding: 16px;
+    margin: 16px; /* Example margin */
+  }
+  
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .notifications-header h2 {
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+  .unread-count {
+    background-color: #007bff; /* Example blue color */
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.8em;
+  }
+  
+  .notifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .notification {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex; /* Enable flexbox for layout */
+    flex-direction: column; /* Stack content on small screens */
+  }
+  
+  .notification-content {
+    margin-bottom: 8px; /* Add space between content and actions on small screens */
+  }
+  
+  .notification-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .notification-details {
+    color: #555;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+  }
+  
+  .notification-time {
+    color: #777;
+    font-size: 0.8em;
+  }
+  
+  .notification-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .notification-actions button {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #eee;
+    cursor: pointer;
+    font-size: 0.8em;
+  }
+  
+  .notification-actions .mark-read {
+    background-color: #f0f8ff; /* Example light blue */
+    color: #007bff;
+  }
+  
+  .notification-actions .dismiss {
+    background-color: #ffe0e0; /* Example light red */
+    color: #dc3545;
+  }
+  
+  .mark-all-read {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    width: 100%; /* Make button full width on small screens */
+    margin-top: 16px;
+  }
+  
+  /* Responsive adjustments for small devices (example using a media query) */
+  @media (min-width: 600px) {
+    .notification {
+      flex-direction: row; /* Arrange content and actions in a row on larger screens */
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .notification-content {
+      margin-bottom: 0; /* Remove extra bottom margin on larger screens */
+      flex-grow: 1; /* Allow content to take up available space */
+    }
+  
+    .mark-all-read {
+      width: auto; /* Adjust width on larger screens */
+    }
+  }

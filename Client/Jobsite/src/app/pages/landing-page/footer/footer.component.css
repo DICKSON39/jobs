@@ -1,0 +1,75 @@
+/* Default footer styles */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 1rem; /* Add some horizontal padding */
+  }
+  
+  .footer-columns {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem; /* Add some padding around the columns */
+  }
+  
+  .copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem; /* Add some top padding to separate from columns */
+  }
+  
+  .footer a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1rem; /* Add some spacing between links */
+  }
+  
+  .footer a:last-child {
+    margin-right: 0; /* Remove margin from the last link */
+  }
+  
+  .footer a:hover {
+    color: #007bff;
+  }
+  
+  /* Responsive styles for small devices */
+  @media (max-width: 768px) {
+    .footer-columns {
+      flex-direction: column; /* Stack columns vertically */
+      align-items: center; /* Center items within columns */
+    }
+  
+    .footer-column {
+      margin-bottom: 1.5rem; /* Add spacing between stacked columns */
+      text-align: center; /* Center text within columns */
+    }
+  
+    .footer-column h3 {
+      margin-bottom: 0.5rem;
+    }
+  
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .footer-column li {
+      margin-bottom: 0.25rem;
+    }
+  
+    .footer a {
+      margin-right: 0; /* Remove right margin on stacked links */
+      margin-bottom: 0.5rem; /* Add bottom margin for stacked links */
+      display: flex;
+      flex-direction: column; /* Allow links to center properly */
+    }
+  
+    .copyright {
+      padding: 1rem; /* Add padding around the copyright on small screens */
+      text-align: center; /* Center copyright text */
+    }
+  }
+

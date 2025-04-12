@@ -1,0 +1,213 @@
+body {
+    font-family: sans-serif;
+    margin: 10px; /* Adjust overall margin for smaller screens */
+    background-color: #f4f6f8;
+  }
+  
+  .container {
+    max-width: 100%; /* Take full width on smaller screens */
+    height: auto; /* Adjust height based on content */
+    margin: 10px auto; /* Add top/bottom margin for spacing */
+    background-color: #fff;
+    padding: 20px; /* Adjust padding for smaller screens */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    margin-bottom: 15px; /* Adjust margin */
+    color: #333;
+    text-align: center; /* Center header on smaller screens */
+  }
+  
+  .header h2 {
+    margin-top: 0;
+    font-size: 1.8em; /* Adjust font size */
+  }
+  
+  .header p {
+    color: #777;
+    font-size: 0.9em; /* Adjust font size */
+    margin-bottom: 10px; /* Adjust margin */
+  }
+  
+  .navigation {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling for many buttons */
+    margin-bottom: 15px; /* Adjust margin */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px; /* Adjust padding */
+  }
+  
+  .nav-button {
+    background: none;
+    border: none;
+    color: #555;
+    padding: 8px 12px; /* Adjust padding */
+    margin-right: 8px; /* Adjust margin */
+    cursor: pointer;
+    font-size: 0.95em; /* Adjust font size */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  .nav-button.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Adjust margin */
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 3px; /* Adjust margin */
+    color: #333;
+    font-weight: bold;
+    font-size: 0.85em; /* Adjust font size */
+  }
+  
+  .form-group input[type="text"] {
+    width: 100%;
+    padding: 8px; /* Adjust padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em; /* Adjust font size */
+    box-sizing: border-box;
+  }
+  
+  .skills-input-group {
+    display: flex;
+    flex-direction: column; /* Stack input and button on smaller screens */
+    gap: 8px; /* Adjust gap */
+  }
+  
+  .skills-input-group input[type="text"] {
+    flex-grow: 1;
+  }
+  
+  .add-skill-button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px; /* Adjust padding */
+    cursor: pointer;
+    font-size: 0.85em; /* Adjust font size */
+    width: 100%; /* Make button full width */
+  }
+  
+  .post-job-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 15px; /* Adjust padding */
+    font-size: 1em; /* Adjust font size */
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .preview-button {
+    background: none;
+    color: #555;
+    border: none;
+    padding: 8px 0; /* Adjust padding */
+    font-size: 0.85em; /* Adjust font size */
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  /* Media query for small devices (up to 600px) */
+  @media (max-width: 600px) {
+    .header {
+      text-align: center;
+    }
+  
+    .header h2 {
+      font-size: 1.5em;
+    }
+  
+    .header p {
+      font-size: 0.8em;
+    }
+  
+    .navigation {
+      padding-bottom: 5px;
+    }
+  
+    .nav-button {
+      padding: 6px 10px;
+      font-size: 0.8em;
+      margin-right: 5px;
+    }
+  
+    .form-group label {
+      font-size: 0.8em;
+    }
+  
+    .form-group input[type="text"] {
+      padding: 6px;
+      font-size: 0.9em;
+    }
+  
+    .skills-input-group {
+      flex-direction: column;
+    }
+  
+    .add-skill-button {
+      font-size: 0.8em;
+      padding: 8px 10px;
+    }
+  
+    .post-job-button {
+      font-size: 0.9em;
+      padding: 10px 12px;
+    }
+  
+    .preview-button {
+      font-size: 0.8em;
+      padding: 6px 0;
+    }
+  }
+  
+  /* Media query for slightly larger small devices (up to 768px) */
+  @media (min-width: 601px) and (max-width: 768px) {
+    .header h2 {
+      font-size: 2em;
+    }
+  
+    .header p {
+      font-size: 0.95em;
+    }
+  
+    .nav-button {
+      font-size: 1em;
+      padding: 10px 15px;
+      margin-right: 10px;
+    }
+  
+    .form-group label {
+      font-size: 0.9em;
+    }
+  
+    .form-group input[type="text"] {
+      font-size: 1em;
+      padding: 10px;
+    }
+  
+    .add-skill-button {
+      font-size: 0.9em;
+      padding: 10px 12px;
+    }
+  
+    .post-job-button {
+      font-size: 1.1em;
+      padding: 12px 18px;
+    }
+  
+    .preview-button {
+      font-size: 0.9em;
+    }
+  }

@@ -1,0 +1,97 @@
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h2>Interview Management</h2>
+                <p>Schedule and manage candidate interviews</p>
+            </div>
+            <button class="action-button">Schedule Interview</button>
+        </div>
+
+        <div class="search-filter">
+            <input type="text" class="search-input" placeholder="Search candidate or roles...">
+            <select class="filter-dropdown">
+                <option>All</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+        </div>
+
+        <table class="interview-table">
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Role</th>
+                    <th>Date & Time</th>
+                    <th>Type</th>
+                    <th>Interviewer</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="candidate-info">
+                            <div class="avatar">SC</div>
+                            <span>Sarah Chen</span>
+                        </div>
+                    </td>
+                    <td>Senior Developer</td>
+                    <td>2024-02-15<br>14:00</td>
+                    <td>Technical</td>
+                    <td>Joan Smith</td>
+                    <td><span class="status-badge status-scheduled">Scheduled</span></td>
+                    <td>
+                        <div class="actions-buttons">
+                            <button class="action-link">Add Feedback</button>
+                            <button class="action-link">Cancel</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="candidate-info">
+                            <div class="avatar">MR</div>
+                            <span>Michael Rodriguez</span>
+                        </div>
+                    </td>
+                    <td>Full Stack Engineer</td>
+                    <td>2024-02-18<br>15:00</td>
+                    <td>Cultural</td>
+                    <td>Lisa Wong</td>
+                    <td><span class="status-badge status-completed">Completed</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="candidate-info">
+                            <div class="avatar">EJ</div>
+                            <span>Emily Johnson</span>
+                        </div>
+                    </td>
+                    <td>Frontend Developer</td>
+                    <td>2024-02-14<br>15:30</td>
+                    <td>Technical</td>
+                    <td>David Park</td>
+                    <td><span class="status-badge status-cancelled">Cancelled</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="candidate-info">
+                            <div class="avatar">JW</div>
+                            <span>James Wilson</span>
+                        </div>
+                    </td>
+                    <td>Backend Engineer</td>
+                    <td>2024-02-17<br>10:00</td>
+                    <td>Initial</td>
+                    <td>Maria Garcia</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>

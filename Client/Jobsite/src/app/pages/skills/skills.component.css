@@ -1,0 +1,129 @@
+body {
+    font-family: sans-serif;
+    margin: 10px; /* Adjust overall margin for smaller screens */
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 15px; /* Adjust padding for smaller screens */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Make container full width on smaller screens */
+    margin: 10px auto; /* Adjust margin for smaller screens */
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 15px; /* Adjust margin for smaller screens */
+    font-size: 1.3em; /* Adjust font size for smaller screens */
+    text-align: center;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust minmax for smaller cards */
+    gap: 15px; /* Adjust gap for smaller screens */
+  }
+  
+  .skill-card {
+    background-color: #f9f9f9;
+    padding: 12px; /* Adjust padding for smaller screens */
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+  
+  .skill-title {
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 6px; /* Adjust margin for smaller screens */
+    font-size: 1em; /* Adjust font size for smaller screens */
+  }
+  
+  .skill-description {
+    color: #666;
+    font-size: 0.85em; /* Adjust font size for smaller screens */
+    margin-bottom: 12px; /* Adjust margin for smaller screens */
+  }
+  
+  .proficiency-bar-container {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    height: 6px; /* Adjust height for smaller screens */
+    overflow: hidden;
+  }
+  
+  .proficiency-bar {
+    background-color: #6750a4;
+    height: 100%;
+    border-radius: 4px;
+  }
+  
+  .proficiency-text {
+    color: #777;
+    font-size: 0.75em; /* Adjust font size for smaller screens */
+    margin-top: 3px; /* Adjust margin for smaller screens */
+    text-align: right;
+  }
+  
+  /* Media query for small devices (up to 600px) */
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+  
+    .skills-grid {
+      grid-template-columns: 1fr; /* Stack skills on small screens */
+      gap: 10px;
+    }
+  
+    .skill-title {
+      font-size: 0.9em;
+    }
+  
+    .skill-description {
+      font-size: 0.8em;
+      margin-bottom: 10px;
+    }
+  
+    .proficiency-bar-container {
+      height: 4px;
+    }
+  
+    .proficiency-text {
+      font-size: 0.7em;
+      margin-top: 2px;
+    }
+  }
+  
+  /* Media query for slightly larger small devices (up to 768px) */
+  @media (min-width: 601px) and (max-width: 768px) {
+    h2 {
+      font-size: 1.4em;
+      margin-bottom: 18px;
+    }
+  
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+  
+    .skill-title {
+      font-size: 1.05em;
+    }
+  
+    .skill-description {
+      font-size: 0.88em;
+      margin-bottom: 14px;
+    }
+  
+    .proficiency-bar-container {
+      height: 7px;
+    }
+  
+    .proficiency-text {
+      font-size: 0.78em;
+      margin-top: 4px;
+    }
+  }

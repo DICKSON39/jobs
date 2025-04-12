@@ -1,0 +1,138 @@
+body {
+    font-family: sans-serif;
+    margin: 10px; /* Adjust overall margin for smaller screens */
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 20px; /* Adjust padding for smaller screens */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 95%; /* Make container wider on small screens */
+    max-width: 700px; /* Still maintain a maximum width */
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 8px; /* Adjust margin for smaller screens */
+    font-size: 1.5em; /* Slightly reduce font size */
+  }
+  
+  p {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-bottom: 15px; /* Adjust margin for smaller screens */
+  }
+  
+  .section {
+    margin-bottom: 20px; /* Adjust margin for smaller screens */
+  }
+  
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px; /* Adjust gap for smaller screens */
+  }
+  
+  .value-card {
+    background-color: #f9f9f9;
+    padding: 15px; /* Adjust padding for smaller screens */
+    border-radius: 6px;
+    border: 1px solid #eee;
+  }
+  
+  .value-card h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 8px; /* Adjust margin for smaller screens */
+    font-size: 1.1em;
+  }
+  
+  .value-card p {
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 0;
+    line-height: 1.4; /* Improve readability */
+  }
+  
+  /* Media query for small devices (example: screens up to 600px wide) */
+  @media (max-width: 600px) {
+    body {
+      margin: 5px; /* Further reduce body margin */
+    }
+  
+    .container {
+      padding: 15px; /* Further reduce container padding */
+      border-radius: 6px;
+    }
+  
+    h2 {
+      font-size: 1.3em; /* Further reduce heading size */
+      margin-bottom: 6px;
+    }
+  
+    p {
+      font-size: 0.85em; /* Further reduce paragraph size */
+      margin-bottom: 12px;
+    }
+  
+    .section {
+      margin-bottom: 15px; /* Further reduce section margin */
+    }
+  
+    .values-grid {
+      grid-template-columns: 1fr; /* Stack cards on very small screens */
+      gap: 10px; /* Further reduce gap */
+    }
+  
+    .value-card {
+      padding: 10px; /* Further reduce card padding */
+    }
+  
+    .value-card h3 {
+      font-size: 1em; /* Further reduce card heading size */
+      margin-bottom: 5px;
+    }
+  
+    .value-card p {
+      font-size: 0.8em; /* Further reduce card paragraph size */
+    }
+  }
+  
+  /* Media query for slightly larger small devices (e.g., larger phones) */
+  @media (min-width: 601px) and (max-width: 768px) {
+    .container {
+      padding: 25px;
+    }
+  
+    h2 {
+      font-size: 1.4em;
+    }
+  
+    p {
+      font-size: 0.9em;
+    }
+  
+    .values-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust minmax for slightly wider screens */
+      gap: 18px;
+    }
+  
+    .value-card {
+      padding: 18px;
+    }
+  
+    .value-card h3 {
+      font-size: 1.05em;
+    }
+  
+    .value-card p {
+      font-size: 0.85em;
+    }
+  }

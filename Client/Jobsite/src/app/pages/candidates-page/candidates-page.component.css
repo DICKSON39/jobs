@@ -1,0 +1,222 @@
+body {
+    font-family: sans-serif;
+    margin: 10px; /* Adjust overall margin for smaller screens */
+    background-color: #f4f6f8;
+  }
+  
+  .container {
+    max-width: 100%; /* Make container full width on smaller screens */
+    margin: 10px auto; /* Add top/bottom margin */
+    background-color: #fff;
+    padding: 15px; /* Adjust padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column; /* Stack header elements on small screens */
+    align-items: flex-start; /* Align to the left */
+    gap: 10px; /* Adjust spacing */
+    margin-bottom: 15px;
+  }
+  
+  .header h2 {
+    margin: 0;
+    font-size: 1.5em; /* Adjust font size */
+    color: #333;
+  }
+  
+  .search-bar {
+    display: flex;
+    gap: 8px; /* Adjust spacing */
+    align-items: center;
+    width: 100%; /* Make search bar full width */
+  }
+  
+  .search-input {
+    padding: 8px; /* Adjust padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Make input full width */
+    font-size: 0.9em; /* Adjust font size */
+  }
+  
+  .filter-dropdown {
+    padding: 8px; /* Adjust padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em; /* Adjust font size */
+  }
+  
+  .match-score-button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 10px; /* Adjust padding */
+    cursor: pointer;
+    font-size: 0.85em; /* Adjust font size */
+  }
+  
+  .candidate-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .candidate-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px; /* Adjust margin */
+    padding: 10px; /* Adjust padding */
+    display: flex;
+    flex-direction: column; /* Stack info and actions on small screens */
+    align-items: flex-start; /* Align items to the start */
+    gap: 10px; /* Adjust spacing */
+  }
+  
+  .candidate-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing */
+    width: 100%; /* Make info full width */
+  }
+  
+  .avatar {
+    width: 30px; /* Adjust size */
+    height: 30px; /* Adjust size */
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em; /* Adjust font size */
+  }
+  
+  .details {
+    flex-grow: 1;
+  }
+  
+  .name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3px;
+    font-size: 1em; /* Adjust font size */
+  }
+  
+  .title {
+    color: #666;
+    font-size: 0.8em; /* Adjust font size */
+    margin-bottom: 2px;
+  }
+  
+  .location {
+    color: #888;
+    font-size: 0.7em; /* Adjust font size */
+  }
+  
+  .skills {
+    display: flex;
+    gap: 3px; /* Adjust spacing */
+    margin-top: 5px;
+    flex-wrap: wrap; /* Allow skills to wrap to the next line */
+  }
+  
+  .skill-tag {
+    background-color: #e0f7fa;
+    color: #00acc1;
+    border-radius: 10px; /* Adjust border-radius */
+    padding: 3px 6px; /* Adjust padding */
+    font-size: 0.7em; /* Adjust font size */
+  }
+  
+  .match-score {
+    text-align: left; /* Align left on stacked layout */
+    width: 100%; /* Make full width */
+  }
+  
+  .match-percentage {
+    font-size: 1.2em; /* Adjust font size */
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 3px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 5px; /* Adjust spacing */
+    width: 100%; /* Make actions full width */
+  }
+  
+  .view-profile-button,
+  .contact-button {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 6px 10px; /* Adjust padding */
+    cursor: pointer;
+    font-size: 0.8em; /* Adjust font size */
+    flex-grow: 1; /* Distribute space equally */
+  }
+  
+  .contact-button {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  /* Media query for small devices (up to 600px) */
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      align-items: stretch; /* Make search bar full width */
+    }
+  
+    .search-bar {
+      flex-direction: column; /* Stack search input and filter */
+    }
+  
+    .candidate-item {
+      flex-direction: column; /* Stack info and actions */
+      align-items: stretch;
+    }
+  
+    .actions {
+      flex-direction: column; /* Stack buttons */
+    }
+  
+    .match-score {
+      text-align: left;
+      margin-top: 5px;
+    }
+  }
+  
+  /* Media query for slightly larger small devices (up to 768px) */
+  @media (min-width: 601px) and (max-width: 768px) {
+    .header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .search-bar {
+      width: auto; /* Adjust search bar width */
+    }
+  
+    .candidate-item {
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .actions {
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+  
+    .match-score {
+      text-align: right;
+      width: auto;
+    }
+  }

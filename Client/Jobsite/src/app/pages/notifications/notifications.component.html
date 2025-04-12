@@ -1,0 +1,41 @@
+<div class="notifications-container">
+    <div class="notifications-header">
+      <h2>Notifications</h2>
+      <span class="unread-count">2 unread</span>
+    </div>
+    <ul class="notifications-list">
+      <li class="notification">
+        <div class="notification-content">
+          <p class="notification-title">Performance Review</p>
+          <p class="notification-details">Your annual review is scheduled for next week</p>
+          <p class="notification-time">2 hours ago</p>
+        </div>
+        <div class="notification-actions">
+          <button class="mark-read">Mark as read</button>
+          <button class="dismiss">Dismiss</button>
+        </div>
+      </li>
+      <li class="notification">
+        <div class="notification-content">
+          <p class="notification-title">Team Meeting</p>
+          <p class="notification-details">Weekly sync moved to 2:00 PM today</p>
+          <p class="notification-time">2 hours ago</p>
+        </div>
+        <div class="notification-actions">
+          <button class="mark-read">Mark as read</button>
+          <button class="dismiss">Dismiss</button>
+        </div>
+      </li>
+      <li class="notification">
+        <div class="notification-content">
+          <p class="notification-title">Holiday Schedule</p>
+          <p class="notification-details">Updated company holiday calendar available</p>
+          <p class="notification-time">1 day ago</p>
+        </div>
+        <div class="notification-actions">
+          <button class="dismiss">Dismiss</button>
+        </div>
+      </li>
+    </ul>
+    <button class="mark-all-read" (click)="markAllAsRead()">Mark all as read</button>
+  </div>

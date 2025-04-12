@@ -1,0 +1,38 @@
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Employer Dashboard</h2>
+            <p>Manage your hiring process and candidate interactions</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button active">Post Job</button>
+            <button (click)="navigateToCandidates()"  class="nav-button">Candidates</button>
+            <button (click)="navigateToChat()" class="nav-button">Chat</button>
+            <button (click)=" navigateToInterview()" class="nav-button">Interviews</button>
+            <button (click)="navigateToAnalytics()"  class="nav-button">Analytics</button>
+        </div>
+
+        <div>
+            <h2>Post New Job</h2>
+            <form>
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" placeholder="Job Title">
+                </div>
+
+                <div class="form-group">
+                    <label for="requiredSkills">Required Skills</label>
+                    <div class="skills-input-group">
+                        <input type="text" id="requiredSkills" placeholder="Required Skills">
+                        <button type="button" class="add-skill-button">Add Skill</button>
+                    </div>
+                    </div>
+
+                <button type="submit" class="post-job-button">Post Job</button>
+            </form>
+
+            <button class="preview-button">Preview</button>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,128 @@
+body {
+    font-family: sans-serif;
+    margin: 10px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 95%; /* Use a percentage for better responsiveness */
+    max-width: 400px; /* Still maintain a maximum width */
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1.5em;
+  }
+  
+  p {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    line-height: 1.4; /* Improve readability on smaller screens */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 3px;
+    color: #333;
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: calc(100% - 12px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  button {
+    background-color: #6750a4; /* Approximate purple color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make button full width on small screens */
+  }
+  
+  button:hover {
+    background-color: #514081; /* Darker purple on hover */
+  }
+  
+  /* Media query for small devices (example: screens up to 600px wide) */
+  @media (max-width: 600px) {
+    body {
+      margin: 5px; /* Further reduce body margin */
+    }
+  
+    .container {
+      padding: 15px; /* Further reduce container padding */
+      border-radius: 6px;
+    }
+  
+    h2 {
+      font-size: 1.3em; /* Further reduce heading size */
+      margin-bottom: 6px;
+    }
+  
+    p {
+      font-size: 0.85em; /* Further reduce paragraph size */
+      margin-bottom: 12px;
+    }
+  
+    label {
+      font-size: 0.8em; /* Further reduce label size */
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: 6px; /* Further reduce input padding */
+      font-size: 0.9em;
+    }
+  
+    button {
+      padding: 8px 12px; /* Further reduce button padding */
+      font-size: 0.9em;
+    }
+  }
+  
+  /* You can add more media queries for different screen sizes if needed */
+  /* For example, for tablets (around 601px to 768px): */
+  /* @media (min-width: 601px) and (max-width: 768px) { */
+  /* .container { */
+  /* padding: 25px; */
+  /* width: 80%; */
+  /* } */
+  /* h2 { */
+  /* font-size: 1.4em; */
+  /* } */
+  /* p { */
+  /* font-size: 0.9em; */
+  /* } */
+  /* } */

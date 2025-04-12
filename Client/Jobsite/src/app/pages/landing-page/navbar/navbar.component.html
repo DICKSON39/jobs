@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <div class="logo">Skill Match AI</div>
+  <button class="menu-toggle" (click)="toggleMenu()">
+    &#9776;
+  </button>
+  <div class="nav-links" [ngClass]="{'open': isMenuOpen}">
+    <a (click)="navigateToHome()">Home</a>
+    <a (click)="navigateToAdmin()">Admin</a>
+    <a (click)="navigateToEmployer()">Employer</a>
+    <a (click)="navigateToJobseeker()">Job Seeker</a>
+    <div class="login">
+      <a (click)="navigateToLogin()">Log In</a>
+    </div>
+    <button (click)="navigateToRegister()" class="btn purple">Register</button>
+  </div>
+</nav>

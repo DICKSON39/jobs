@@ -1,0 +1,116 @@
+body {
+    font-family: sans-serif;
+    margin: 10px; /* Adjust overall margin for smaller screens */
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 15px; /* Adjust padding for smaller screens */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Make container full width on smaller screens */
+    margin: 10px auto; /* Adjust margin for smaller screens */
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 3px; /* Adjust margin for smaller screens */
+    font-size: 1.3em; /* Adjust font size for smaller screens */
+  }
+  
+  p {
+    color: #666;
+    font-size: 0.85em; /* Adjust font size for smaller screens */
+    margin-bottom: 15px; /* Adjust margin for smaller screens */
+  }
+  
+  .skills-section {
+    margin-top: 15px; /* Adjust margin for smaller screens */
+  }
+  
+  .skills-section h3 {
+    color: #444;
+    margin-bottom: 8px; /* Adjust margin for smaller screens */
+    font-size: 1em; /* Adjust font size for smaller screens */
+  }
+  
+  .skill-category {
+    margin-bottom: 12px; /* Adjust margin for smaller screens */
+  }
+  
+  .skill-category-title {
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 6px; /* Adjust margin for smaller screens */
+    font-size: 0.9em; /* Adjust font size for smaller screens */
+  }
+  
+  .add-new-skill-button {
+    background-color: #6750a4;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Adjust padding for smaller screens */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em; /* Adjust font size for smaller screens */
+    margin-top: 8px; /* Adjust margin for smaller screens */
+    width: 100%; /* Make button full width on smaller screens */
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+  
+  /* Media query for small devices (up to 600px) */
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 1.1em;
+      margin-bottom: 2px;
+    }
+  
+    p {
+      font-size: 0.8em;
+      margin-bottom: 12px;
+    }
+  
+    .skills-section h3 {
+      font-size: 0.9em;
+      margin-bottom: 6px;
+    }
+  
+    .skill-category-title {
+      font-size: 0.85em;
+      margin-bottom: 4px;
+    }
+  
+    .add-new-skill-button {
+      font-size: 0.75em;
+      padding: 6px 10px;
+    }
+  }
+  
+  /* Media query for slightly larger small devices (up to 768px) */
+  @media (min-width: 601px) and (max-width: 768px) {
+    h2 {
+      font-size: 1.4em;
+      margin-bottom: 4px;
+    }
+  
+    p {
+      font-size: 0.88em;
+      margin-bottom: 18px;
+    }
+  
+    .skills-section h3 {
+      font-size: 1.05em;
+      margin-bottom: 8px;
+    }
+  
+    .skill-category-title {
+      font-size: 0.95em;
+      margin-bottom: 5px;
+    }
+  
+    .add-new-skill-button {
+      font-size: 0.85em;
+      padding: 8px 15px;
+    }
+  }

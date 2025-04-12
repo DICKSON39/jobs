@@ -1,0 +1,201 @@
+/* Center the login form */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f2f2f2; /* light gray background */
+  padding: 1rem;
+}
+
+/* Login card box */
+.login-box {
+  background: #ffffff;
+  padding: 1.5rem; /* Slightly reduced padding for smaller screens */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Adjust width for smaller screens */
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Heading */
+.login-box h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem; /* Slightly smaller font size for smaller screens */
+  font-weight: bold;
+}
+
+/* Subtext */
+.login-box p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem; /* Slightly reduced margin for smaller screens */
+}
+
+/* Inputs */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 0.6rem; /* Slightly reduced padding for smaller screens */
+  margin: 0.4rem 0 0.8rem 0; /* Slightly reduced margins for smaller screens */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem; /* Slightly smaller font size for smaller screens */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Password field container */
+.password-field {
+  position: relative;
+}
+
+/* Eye icon */
+.password-field span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1rem; /* Slightly smaller font size for smaller screens */
+}
+
+/* Checkbox and forgot password */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem; /* Slightly reduced margin for smaller screens */
+  font-size: 0.8rem; /* Slightly smaller font size for smaller screens */
+}
+
+.options a {
+  color: #6b46ff;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  background-color: #5a3dfc;
+  color: white;
+  border: none;
+  padding: 0.6rem; /* Slightly reduced padding for smaller screens */
+  font-size: 0.9rem; /* Slightly smaller font size for smaller screens */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e2bc1;
+}
+
+button[type="submit"]:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Sign up text */
+.signup {
+  margin-top: 0.8rem; /* Slightly reduced margin for smaller screens */
+  font-size: 0.8rem; /* Slightly smaller font size for smaller screens */
+}
+
+.signup a {
+  color: #6b46ff;
+  text-decoration: none;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
+
+/* Media Query for Small Screens (e.g., phones) */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .login-box h2 {
+    font-size: 1.2rem;
+  }
+
+  .login-box p {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 0.5rem;
+    margin: 0.3rem 0 0.6rem 0;
+    font-size: 0.85rem;
+  }
+
+  .password-field span {
+    font-size: 1rem;
+  }
+
+  .options {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  button[type="submit"] {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .signup {
+    font-size: 0.75rem;
+    margin-top: 0.6rem;
+  }
+}
+
+/* Media Query for Tablets and Larger Phones */
+@media (min-width: 481px) and (max-width: 768px) {
+  .login-box {
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .login-box h2 {
+    font-size: 1.4rem;
+  }
+
+  .login-box p {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    padding: 0.7rem;
+    margin: 0.4rem 0 0.9rem 0;
+    font-size: 0.9rem;
+  }
+
+  .options {
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+  }
+
+  button[type="submit"] {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .signup {
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+  }
+}
