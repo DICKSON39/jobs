@@ -1,9 +1,10 @@
 .notifications-container {
-    background-color: #f9f9f9; /* Example background */
+    background-color: white; /* Example background */
     border: 1px solid #ddd; /* Example border */
     border-radius: 8px; /* Example rounded corners */
     padding: 16px;
     margin: 16px; /* Example margin */
+    height: 100vh;
   }
   
   .notifications-header {

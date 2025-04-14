@@ -4,6 +4,7 @@
     border-radius: 8px;
     border: 1px solid #ddd;
     margin-bottom: 15px; /* Adjust margin for smaller screens */
+    height: 100vh;
   }
   
   .overview-cards {

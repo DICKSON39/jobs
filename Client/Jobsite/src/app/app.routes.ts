@@ -19,6 +19,8 @@ import { SkillsComponent } from './pages/skills/skills.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { AICareerPathComponent } from './pages/aicareer-path/aicareer-path.component';
 import { AiChatComponent } from './pages/ai-chat/ai-chat.component';
+import { AdminSecurityComponent } from './pages/admin-security/admin-security.component';
+import { MonitoringAiComponent } from './pages/monitoring-ai/monitoring-ai.component';
 
 export const routes: Routes = [
     {path: '', component: LandingPageComponent},
@@ -40,7 +42,9 @@ export const routes: Routes = [
     {path:'jobseeker/skillsUploading',component:SkillsUploadingComponent},
     {path:'jobseeker/skills', component:SkillsComponent},
     {path:'notifications',component:NotificationsComponent},
-    {path:'careerPath',component:AICareerPathComponent}
+    {path:'careerPath',component:AICareerPathComponent},
+    {path: 'adminSecurity',component:AdminSecurityComponent},
+    {path: 'adminAiMonitoring',component:MonitoringAiComponent}
 
    
 ];

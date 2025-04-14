@@ -14,7 +14,10 @@ export class AdminComponent {
     this.router.navigate(['/aiChecking']);
   }
 
-  navigateToPrivacyPolicy(){
-    this.router.navigate(['/policy']);
+  navigateToSecurityPolicy(){
+    this.router.navigate(['/adminSecurity']);
+  }
+  navigateToAiMonitoring(){
+    this.router.navigate(['/adminAiMonitoring'])
   }
 }

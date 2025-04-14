@@ -1,0 +1,245 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px; /* Add some default padding */
+    background-color: #f4f4f7; /* Example background */
+    color: #333; /* Example text color */
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 1200px; /* Limit container width on larger screens */
+    margin: 0 auto;
+    height: 100vh;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.5em;
+    margin: 0;
+  }
+  
+  .primary-button {
+    background-color: #007bff; /* Example button color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  .overview-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive columns */
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .metric-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .metric-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .metric-label {
+    color: #777;
+    font-size: 0.9em;
+  }
+  
+  .recent-errors h2,
+  .accuracy-trend h2,
+  .model-versions h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .error-item {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+  }
+  
+  .error-details span {
+    display: block;
+  }
+  
+  .error-type {
+    font-weight: bold;
+    color: #dc3545; /* Example error color */
+  }
+  
+  .error-time {
+    color: #777;
+    font-size: 0.8em;
+  }
+  
+  .trend-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .trend-item {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+  }
+  
+  .trend-date {
+    width: 60px;
+    color: #555;
+    margin-right: 10px;
+  }
+  
+  .progress-bar {
+    background-color: #e9ecef;
+    border-radius: 3px;
+    height: 10px;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    margin-right: 5px;
+  }
+  
+  .progress-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #007bff; /* Example progress color */
+    border-radius: 3px;
+  }
+  
+  .trend-item span:last-child {
+    min-width: 40px;
+    text-align: right;
+  }
+  
+  .version-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .version-item {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+  }
+  
+  .version-name {
+    font-weight: bold;
+  }
+  
+  .version-date {
+    color: #777;
+  }
+  
+  .version-status {
+    background-color: #28a745; /* Example stable color */
+    color: white;
+    padding: 5px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+  }
+  
+  /* Responsive Design using Media Queries */
+  @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+  
+    .dashboard-header h1 {
+      margin-bottom: 10px;
+    }
+  
+    .overview-metrics {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+  
+    .metric-value {
+      font-size: 1.5em;
+    }
+  
+    .recent-errors .error-item,
+    .version-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .error-time,
+    .version-date {
+      margin-top: 5px;
+    }
+  
+    .trend-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .trend-date {
+      margin-bottom: 5px;
+    }
+  
+    .progress-bar {
+      width: 100% !important; /* Ensure full width on small screens */
+      margin-right: 0;
+      margin-bottom: 5px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+  
+    .dashboard-header h1 {
+      font-size: 1.3em;
+    }
+  
+    .primary-button {
+      font-size: 0.8em;
+      padding: 8px 12px;
+    }
+  
+    .metric-value {
+      font-size: 1.3em;
+    }
+  
+    .recent-errors h2,
+    .accuracy-trend h2,
+    .model-versions h2 {
+      font-size: 1.1em;
+    }
+  }

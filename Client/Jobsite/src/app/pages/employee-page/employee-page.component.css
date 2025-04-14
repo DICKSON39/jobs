@@ -6,7 +6,7 @@ body {
   
   .container {
     max-width: 100%; /* Take full width on smaller screens */
-    height: auto; /* Adjust height based on content */
+    height: 100vh; /* Adjust height based on content */
     margin: 10px auto; /* Add top/bottom margin for spacing */
     background-color: #fff;
     padding: 20px; /* Adjust padding for smaller screens */

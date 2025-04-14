@@ -1,0 +1,59 @@
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Security Dashboard</h1>
+
+        </header>
+
+        <div class="overview-section">
+            <div class="overview-card">
+                <div class="card-title">Failed Login Attempts</div>
+                <div class="card-value">23</div>
+            </div>
+            <div class="overview-card">
+                <div class="card-title">Active Users</div>
+                <div class="card-value">156</div>
+            </div>
+            <div class="overview-card">
+                <div class="card-title">Blocked IPs</div>
+                <div class="card-value">12</div>
+            </div>
+            <div class="overview-card">
+                <div class="card-title">Security Score</div>
+                <div class="card-value">94%</div>
+            </div>
+        </div>
+
+        <div class="alerts-authentication-section">
+            <div class="security-alerts-section">
+                <h2>Security Alerts</h2>
+                <div class="alert-item alert-high">
+                    <div class="alert-message">Malicious login attempt detected from IP 192.168.1.100</div>
+                </div>
+                <div class="alert-item alert-medium">
+                    <div class="alert-message">A suspicious file download was blocked.</div>
+                </div>
+                <div class="alert-item alert-low">
+                    <div class="alert-message">System needs security patch: vulnerability detected.</div>
+                </div>
+            </div>
+
+            <div class="two-factor-auth-section">
+                <h2>Two-Factor Authentication</h2>
+                <div class="auth-method">
+                    <span class="method-name">Email OTP</span>
+                    <button class="enable-button enabled">Enabled</button>
+                </div>
+                <div class="auth-method">
+                    <span class="method-name">SMS OTP</span>
+                    <button class="enable-button disabled">Disabled</button>
+                </div>
+                <div class="auth-method">
+                    <span class="method-name">Authenticator App</span>
+                    <button class="enable-button enabled">Enabled</button>
+                </div>
+            </div>
+        </div>
+
+        </div>
+</body>

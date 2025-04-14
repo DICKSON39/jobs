@@ -5,6 +5,7 @@ body {
   }
   
   .container {
+    height: 100vh;
     background-color: #fff;
     padding: 15px; /* Adjust padding for smaller screens */
     border-radius: 8px;
