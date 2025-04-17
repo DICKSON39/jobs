@@ -24,7 +24,7 @@ import { MonitoringAiComponent } from './pages/monitoring-ai/monitoring-ai.compo
 
 export const routes: Routes = [
     {path: '', component: LandingPageComponent},
-    {path: 'register', component: RegisterPageComponent},
+    {path: 'register', component:RegisterPageComponent},
     {path: 'login', component: LoginPageComponent},
     {path: 'about',component:AboutComponent},
     {path: 'contact',component:ContactComponent},

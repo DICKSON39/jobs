@@ -5,12 +5,10 @@
   </button>
   <div class="nav-links" [ngClass]="{'open': isMenuOpen}">
     <a (click)="navigateToHome()">Home</a>
-    <a (click)="navigateToAdmin()">Admin</a>
-    <a (click)="navigateToEmployer()">Employer</a>
-    <a (click)="navigateToJobseeker()">Job Seeker</a>
+    
     <div class="login">
       <a (click)="navigateToLogin()">Log In</a>
     </div>
-    <button (click)="navigateToRegister()" class="btn purple">Register</button>
+    <button routerLink="/register" class="btn purple">Register</button>
   </div>
 </nav>

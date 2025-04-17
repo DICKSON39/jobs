@@ -7,7 +7,7 @@ async function run() {
     const distFolder = core.getInput('dist-folder');
     const region = core.getInput('bucket-region');
 
-   
+
 
     // AWS CLI command: aws s3 sync
     await exec.exec(`aws s3 sync ${distFolder} s3://${bucket} --region ${region} --delete`);

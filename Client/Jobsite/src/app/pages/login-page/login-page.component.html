@@ -3,21 +3,22 @@
     <h2>Welcome back</h2>
     <p>Please enter your details to sign in</p>
 
-    <form [formGroup]="form2"(ngSubmit)="onSubmit()">
+    <form [formGroup]="form2" (ngSubmit)="onSubmit()">
       <label>Email</label>
-      <input type="email"  placeholder="Enter your email" formControlName="email" />
-      <div *ngIf="!form2.controls.email?.valid &&(form2.controls.email.touched)">
-       <p *ngIf="!form2.controls.email.errors?.['required']">email is allowed</p>
-        <p *ngIf="!form2.controls.email.errors?.['unAllowedNames']">email is not allowed</p>
+      <input type="email" placeholder="Enter your email" formControlName="email" />
+      <div *ngIf="form2.controls['email']?.touched && form2.controls['email']?.invalid">
+        <p *ngIf="form2.controls['email'].errors?.['required']">Email is required</p>
+        <p *ngIf="form2.controls['email'].errors?.['email']">Invalid email format</p>
+        <p *ngIf="form2.controls['email'].errors?.['unAllowedNames']">Email is not allowed</p>
       </div>
 
       <label>Password</label>
       <div class="password-field">
-        <input  placeholder="Enter your password" type="password" formControlName="password"/>
-        <div *ngIf="!form2.controls.password?.valid &&(form2.controls.password.touched)">
-          <p>Password is required</p>
+        <input placeholder="Enter your password" type="password" formControlName="password" />
+        <div *ngIf="form2.controls['password']?.touched && form2.controls['password']?.invalid">
+          <p *ngIf="form2.controls['password']?.errors?.['required']">Password is required</p>
+          <p *ngIf="form2.controls['password']?.errors?.['minlength']">Password is too short</p>
         </div>
-        
       </div>
 
       <div class="options">
@@ -28,7 +29,7 @@
         <a href="#">Forgot password?</a>
       </div>
 
-      <button class="submit-button" type="submit" [disabled]="!form2.valid"  (click)="navigateToAdmin()">Sign in</button>
+      <button class="submit-button" type="submit" [disabled]="!form2.valid">Sign in</button>
     </form>
 
     <p class="signup">Don't have an account? <a (click)="navigateToRegister()">Sign up</a></p>

@@ -2,7 +2,7 @@
   <h1>Create an account</h1>
   <p class="subtitle">Please enter your details to register</p>
 
-  <form [formGroup]="form" (ngSubmit)="onRegister()" >
+  <form [formGroup]="form" (ngSubmit)="onRegister()">
     <div class="form-group">
       <label for="fullName">Full Name</label>
       <input 
@@ -10,10 +10,9 @@
         id="fullName" 
         formControlName="fullName" 
         placeholder="Enter your full name"
-      >
-      <div  
-           class="error-message" *ngIf="!form.controls.fullName?.valid &&(form.controls.fullName.touched)">
-       <p class="erro-message" >Fullname required!</p>
+      />
+      <div class="error-message" *ngIf="f.fullName.invalid && f.fullName.touched">
+        <p class="error-message">Fullname required!</p>
       </div>
     </div>
 
@@ -24,11 +23,11 @@
         id="email" 
         formControlName="email" 
         placeholder="Enter your email"
-      >
-      <div  
-           class="error-message" *ngIf="!form.controls.email?.valid &&(form.controls.email.touched)">
-           <p>Enter Valid Email</p>
-       <p class="error-message" *ngIf="!form.controls.email.errors?.['required']"> Email is required!</p>
+      />
+      <div class="error-message" *ngIf="f.email.invalid && f.email.touched">
+        <p *ngIf="f.email.errors?.['required']">Email is required!</p>
+        <p *ngIf="f.email.errors?.['email']">Enter a valid email</p>
+        <p *ngIf="f.email.errors?.['unAllowedNames']">Invalid email</p>
       </div>
     </div>
 
@@ -39,10 +38,10 @@
         id="password" 
         formControlName="password" 
         placeholder="Enter your password"
-      >
-      <div 
-           class="error-message" *ngIf="!form.controls.password.valid &&(form.controls.password.touched)">
-        Password must be at least 6 characters
+      />
+      <div class="error-message" *ngIf="f.password.invalid && f.password.touched">
+        <p *ngIf="f.password.errors?.['required']">Password is required</p>
+        <p *ngIf="f.password.errors?.['minlength']">Minimum 8 characters required</p>
       </div>
     </div>
 
@@ -53,13 +52,19 @@
         id="confirmPassword" 
         formControlName="confirmPassword" 
         placeholder="Confirm your password"
-      >
-      <div 
-           class="error-message" *ngIf="!form.controls.confirmPassword.valid &&(form.controls.confirmPassword.touched)">
-        <p *ngIf="!form.controls.confirmPassword.errors?.['required']">Confirm Password is required!</p>
-        <p *ngIf="!form.controls.confirmPassword.errors?.['passwordMismatch']">Passwords do not match!</p>
+      />
+      <div class="error-message" *ngIf="f.confirmPassword.touched && form.errors?.['passwordMismatch']">
+        <p>Passwords do not match!</p>
       </div>
-     
+    </div>
+
+    <div class="form-group">
+      <label>User Role</label>
+      <select formControlName="role">
+        <option value="1">Admin</option>
+        <option value="2">Recruiter</option>
+        <option value="3">Jobseeker</option>
+      </select>
     </div>
 
     <div class="checkbox-group">
@@ -67,20 +72,19 @@
         type="checkbox" 
         id="terms" 
         formControlName="termsAccepted"
-      >
+      />
       <label for="terms">I agree to the Terms of Service and Privacy Policy</label>
-      <div 
-           class="error-message" *ngIf="!form.controls.termsAccepted?.valid &&(form.controls.termsAccepted.touched)">
+      <div class="error-message" *ngIf="f.termsAccepted.invalid && f.termsAccepted.touched">
         You must accept the terms
       </div>
     </div>
 
-    <button [disabled]="!form.valid" type="submit"  class="submit-button" (click)="navigateToEmployee()">
+    <button [disabled]="form.invalid" type="submit" class="submit-button">
       Create Account
     </button>
   </form>
 
   <div class="login-link">
-    Already have an account? <a (click)="navigateToLogin()">Sign in</a>
+    Already have an account? <a routerLink="/login">Sign in</a>
   </div>
 </div>

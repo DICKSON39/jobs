@@ -187,3 +187,19 @@ input[type="password"] {
     margin-top: 0.8rem;
   }
 }
+
+.checkbox-group div button {
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.checkbox-group div button:hover {
+  background-color: #eee;
+}

@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -13,48 +14,57 @@ import { Router } from '@angular/router';
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
-  form = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('',[Validators.required]), 
-    remember: new FormControl('',[Validators.required])
-  })
+  private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
+  private router = inject(Router);
 
-  private fb = inject(FormBuilder)
+  form2: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email, this.unAllowedNames]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    remember: [false]
+  });
 
-  form2 =  this.fb.group({
-    email:[,[Validators.required,Validators.email,this.unAllowedNames]],
-    password:[,[Validators.required,Validators.minLength(0)]],
-    remember:[,[Validators.required]]
-  })
-
-  constructor(private router:Router) {}
-
-  
-
-  navigateToAdmin(){
-    this.router.navigate(['/admin'])
-  }
-  
-
-  navigateToRegister(){
-    this.router.navigate(['/register'])
-  }
-
-  
- 
-
-
-  onSubmit(){
-    console.log(this.form)
-    alert("You is Logged in")
-  }
-  unAllowedNames(control:AbstractControl):ValidationErrors|null {
-    const value = control.value
-
-    if(value == "hacker@gmail.com"){
-      return {unAllowedNames:true, message: 'Invalid email'}
+  unAllowedNames(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value === 'hacker@gmail.com') {
+      return { unAllowedNames: true };
     }
-    return null
+    return null;
   }
-  
+
+  onSubmit() {
+    if (this.form2.valid) {
+      this.http.post<any>('http://localhost:3000/api/v1/auth/login', this.form2.value)
+        .subscribe({
+          next: (res) => {
+            // console.log('Login successful:', res);
+
+            // Optional: Save token if needed
+            localStorage.setItem('token', res.token);
+
+            const role = res.user?.role?.roleName;
+
+            if (role === 'ADMIN') {
+              this.router.navigate(['/admin']);
+            } else if (role === 'RECRUITER') {
+              this.router.navigate(['/employee']);
+            } else if (role === 'JOB_SEEKER') {
+              this.router.navigate(['/jobseeker']);
+            } else {
+              alert('Unknown role');
+            }
+          },
+          error: (err) => {
+            console.error('Login failed:', err);
+            alert('Login failed. Please check your credentials.');
+          }
+        });
+    } else {
+      this.form2.markAllAsTouched();
+    }
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
 }
