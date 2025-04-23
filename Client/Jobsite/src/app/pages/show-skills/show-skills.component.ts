@@ -21,7 +21,7 @@ export class ShowSkillsComponent {
   
     //console.log('User ID:', this.userId); // Debugging step to ensure userId is correct
   
-    const url = `http://54.197.174.28:3000/api/user-skills/${this.userId}`;
+    const url = `http://3.83.129.250:3000/api/v1/user-skills/users/${this.userId}/skills`;
     this.http.get(url).subscribe({
       next: (userSkills: any) => {
         this.userSkills = userSkills; // Populate the userSkills array
@@ -34,4 +34,4 @@ export class ShowSkillsComponent {
   }
   
   
-}
+} //http://3.83.129.250:3000/api/v1/user-skills/users/2/skills

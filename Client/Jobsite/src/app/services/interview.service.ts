@@ -21,7 +21,7 @@ export class InterviewService {
   // interview.service.ts
 getInterviewsByApplication(applicationId: number) {
   return this.http.get<any[]>(
-    `http://54.197.174.28:3000/api/v1/applications/${applicationId}/interviews`
+    `http://3.86.230.2:3000/api/v1/applications/${applicationId}/interviews`
   );
 }
 

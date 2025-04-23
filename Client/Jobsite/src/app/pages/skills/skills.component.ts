@@ -26,7 +26,7 @@ export class SkillsComponent implements OnInit {
 
   
   loadSkills() {
-    this.http.get<any[]>(`http://54.197.174.28:3000/api/v1/skills`).subscribe({
+    this.http.get<any[]>(`http://3.83.129.250:3000/api/v1/skills/skills`).subscribe({
       next: (res) => {
         this.skills = res;
       },

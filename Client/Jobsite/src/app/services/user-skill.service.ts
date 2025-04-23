@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserSkillService {
-  private apiUrl = 'http://54.197.174.28:3000/api/user-skills';
+  private apiUrl = 'http://3.83.129.250:3000/api/v1/user-skills/user-skills';
   constructor(private http:HttpClient) { }
 
   createUserSkill(userSkill: {
@@ -19,7 +19,7 @@ export class UserSkillService {
   }
 
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/users`);
+    return this.http.get<any[]>(`http://3.83.129.250:3000/api/v1/users/users`);
   }
 
   

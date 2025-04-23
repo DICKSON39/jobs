@@ -11,15 +11,15 @@ export class JobSkillService {
   constructor(private http:HttpClient) { }
 
   addSkillToJob(jobId:number,skillId:number):Observable<any> {
-    return this.http.post<any>(`http://54.197.174.28:3000/api/job-skills`,{jobId,skillId})
+    return this.http.post<any>(`http://3.83.129.250:3000/api/v1/job-skills/job-skills`,{jobId,skillId})
   }
 
   getAllSkills(): Observable<any[]> {
-    return this.http.get<any[]>(`http://54.197.174.28:3000/api/v1/skills`)
+    return this.http.get<any[]>(`http://3.83.129.250:3000/api/v1/skills/skills`)
   }
 
   getSkillsForJob(jobId: number) {
-    return this.http.get<any[]>(`http://54.197.174.28:3000/api/job-skills/${jobId}`);
+    return this.http.get<any[]>(`http://3.83.129.250:3000/api/v1/job-skills/${jobId}`);
   }
   
 

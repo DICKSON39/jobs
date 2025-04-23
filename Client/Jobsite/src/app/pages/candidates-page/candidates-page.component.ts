@@ -25,7 +25,7 @@ export class CandidatesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://54.197.174.28:3000/api/users/user-skills')
+    this.http.get<any[]>('http://3.83.129.250:3000/api/v1/user-skills/users/user-skills')
     .subscribe(
       (data) => {
         this.userSkills = data;
@@ -39,7 +39,7 @@ export class CandidatesPageComponent implements OnInit {
 
   // Method to fetch user details on "View Profile" button click
   viewUserProfile(userId: number): void {
-    this.http.get<any>(`http://54.197.174.28:3000/api/v1/users/${userId}`).subscribe(
+    this.http.get<any>(`http://3.83.129.250:3000/api/v1/users/users/${userId}`).subscribe(
       (data) => {
         this.selectedUser = data;  // Save the user details in selectedUser
         console.log('User Profile:', this.selectedUser);  // Log or display the profile

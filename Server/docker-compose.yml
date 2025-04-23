@@ -3,7 +3,7 @@
 services:
   backend:
     build: .
-    container_name: backend
+    container_name: MyBackend
     ports:
       - "3000:3000"
     depends_on:
@@ -11,21 +11,21 @@ services:
     entrypoint: ["./wait-for-it.sh", "postgres:5432", "-t","60", "npm", "start"]
     env_file: .env
     networks:
-      - server
+      - mynetwork
 
   postgres:
     image: postgres:15
     container_name: postgres
     environment:
-      
+      DB_HOST:  http://dicksonndumia.s3-website-us-east-1.amazonaws.com/
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
+      POSTGRES_PASSWORD: dalton19nyeri
       POSTGRES_DB: SkillMatchAI
     ports:
       - "5432:5432"
     networks:
-      - server
+      - mynetwork
 
 networks:
-  server:
+  mynetwork:
     driver: bridge

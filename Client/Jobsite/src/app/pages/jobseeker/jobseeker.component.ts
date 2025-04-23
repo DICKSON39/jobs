@@ -48,7 +48,7 @@ export class JobseekerComponent implements OnInit {
    // console.log('User ID:', this.userId);  // Debugging step to ensure userId is correct
   
     // Construct the correct URL
-    const url = `http://54.197.174.28:3000/api/user-skills/${this.userId}`;
+    const url = `http://3.83.129.250:3000/api/v1/user-skills/users/${this.userId}/skills`;
   
     // Make the HTTP GET request
     this.http.get(url).subscribe({

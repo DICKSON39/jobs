@@ -12,7 +12,7 @@ export interface DashboardStats {
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://54.197.174.28:3000/api/v1/analysis/dashboard-stats'
+  private apiUrl = 'http://3.83.129.250:3000/api/v1/analysis/dashboard-stats'
 
   constructor(private http:HttpClient) { }
 

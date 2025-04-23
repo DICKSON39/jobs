@@ -22,11 +22,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
  getUsers():Observable<any[]> {
-  return this.http.get<any[]>(`${this.apiUrl}/user`,{
+  return this.http.get<any[]>(`http://3.83.129.250:3000/api/v1/users/user`,{
     withCredentials:true
   })
  }
  deleteUser(userId: number): Observable<any> {
-  return this.http.delete<any>(`${this.apiUrl}/users/${userId}`);
+  return this.http.delete<any>(`http://3.83.129.250:3000/api/v1/users/users/${userId}`);
 }
 }

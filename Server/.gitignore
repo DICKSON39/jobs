@@ -6,6 +6,8 @@
 
 /uploads
 
+server.pem
+
 
 
 # TypeScript build info

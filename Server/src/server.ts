@@ -22,14 +22,27 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+const allowedOrigins = [
+  'http://localhost:4200',
+  'http://dicksonndumia.s3-website-us-east-1.amazonaws.com'
+];
+
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH","OPTIONS"],
-    allowedHeaders: ['Content-Type',"Authorization"]
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
+
+// ... your other routes, including app.get('/api/jobs', ...);
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -61,5 +74,5 @@ AppDataSource.initialize().then(async () => {
 
   await createDefaultRoles();
 
-  app.listen(PORT, () => console.log(`✅✅Port is running at ${PORT}`));
+  app.listen(3000, '0.0.0.0', () => console.log(`✅✅Port 👌👌👌is running at 3000`));
 });

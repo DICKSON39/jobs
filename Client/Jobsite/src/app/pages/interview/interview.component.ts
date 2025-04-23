@@ -21,7 +21,7 @@ export class InterviewComponent implements OnInit {
   }
 
   fetchApplications() {
-    this.http.get<any>('http://54.197.174.28:3000/api/v1/applications').subscribe({
+    this.http.get<any>('http://3.83.129.250:3000/api/v1/applications/applications').subscribe({
       next: (res) => {
         if (Array.isArray(res.applications)) {
           this.applications = res.applications;
@@ -51,7 +51,7 @@ export class InterviewComponent implements OnInit {
       notes: 'Initial interview',
     };
 
-    this.http.post('http://54.197.174.28:3000/api/v1/interviews', interview).subscribe({
+    this.http.post('http://3.83.129.250:3000/api/v1/interviews/interviews', interview).subscribe({
       next: (res) => {
         alert('Interview scheduled!');
       },

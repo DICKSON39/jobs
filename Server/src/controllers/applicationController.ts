@@ -53,14 +53,24 @@ export const getApplication = asyncHandler(async (req: Request, res: Response) =
   return;
 })
 
-
 export const getApplicationsByUserId = asyncHandler(async (req: Request, res: Response) => {
-  const userId = parseInt(req.params.userId);
-  if (isNaN(userId)) {
-     res.status(400).json({ error: 'Invalid user ID' });
-     return;
+  const { userId } = req.params;
+
+  const parsedUserId = parseInt(userId, 10);
+  if (isNaN(parsedUserId)) {
+    res.status(400).json({ error: "Invalid user ID" });
+    return;
   }
 
-  const result = await pool.query('SELECT * FROM applications WHERE user_id = $1', [userId]);
-  res.status(200).json(result.rows);
+  try {
+    const result = await pool.query(
+      "SELECT * FROM application WHERE userId = $1",
+      [parsedUserId]
+    );
+
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });

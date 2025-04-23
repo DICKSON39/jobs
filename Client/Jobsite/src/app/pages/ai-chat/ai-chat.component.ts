@@ -68,7 +68,7 @@ export class AiChatComponent implements AfterViewChecked { // Implement AfterVie
     try {
       // Send the query to the backend API
       const response = await this.http
-        .post<any>('http://54.197.174.28:3000/api/v1/analysis/ask', {
+        .post<any>('http://3.83.129.250:3000/api/v1/analysis/ask', {
           question:queryText,
         })
         .toPromise();
