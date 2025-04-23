@@ -58,44 +58,45 @@ export class AuthController {
     }
 
     // Login User
-  async LoginUser(req: Request, res: Response) {
-    try {
-      const { email, password } = req.body;
+  // Login User
+async LoginUser(req: Request, res: Response) {
+   try {
+     const { email, password } = req.body;
+ 
+     const user = await authRepository.findOne({
+       where: { email },
+       relations: ['role'],
+     });
+ 
+     if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return
+     }
+ 
+     const isMatch = await bcrypt.compare(password, user.password);
+     if (!isMatch) {
+        res.status(400).json({ message: "Invalid credentials" });
+        return
+     }
+ 
+     // Get the tokens from generateToken
+     const { accessToken, refreshToken } = generateToken(res, user.id.toString(), user.role.id);
+ 
+     const { password: _, ...userWithoutPassword } = user;
+ 
+      res.status(200).json({
+       message: "Login successful",
+       token: accessToken, // 🔥 Send token back explicitly
+       user: userWithoutPassword
+     });
+     return;
+   } catch (error: any) {
+      res.status(500).json({ error: error.message });
 
-
-
-      const user = await authRepository.findOne({
-         where: { email },
-         relations: ['role'],
-       });
-      if (!user) {
-         res.status(404).json({ message: "User not found" });
-         return
-      }
-
-      // Compare provided password with hashed password
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-         res.status(400).json({ message: "Invalid credentials" });
-         return
-      }
-
-      // Generate a token and send it in the response
-      generateToken(res, user.id.toString(), user.role.id);
-
-      // Remove password from the user object before sending it back
-      const { password: _, ...userWithoutPassword } = user;
-
-       res.status(200).json({
-        message: "Login successful",
-        user: userWithoutPassword,
-      });
-      return
-    } catch (error: any) {
-       res.status(500).json({ error: error.message });
-       return
-    }
-  }
+      return;
+   }
+ }
+ 
 
   async logoutUser(req:Request,res:Response) {
    res.cookie("access_token", "", {
@@ -103,7 +104,10 @@ export class AuthController {
       secure:process.env.NODE_ENV !== "development",
       sameSite: "strict",
       expires:new Date(0) //Expires immediately
+   
   });
+  
+
 
   res.cookie("refresh_token", "", {
       httpOnly: true,
@@ -114,6 +118,7 @@ export class AuthController {
 
   res.status(200).json({ message: "User logged out successfully" });
   }
+  
 
 
   }

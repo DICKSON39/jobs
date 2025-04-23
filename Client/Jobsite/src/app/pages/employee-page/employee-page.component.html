@@ -1,38 +1,100 @@
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>Employer Dashboard</h2>
-            <p>Manage your hiring process and candidate interactions</p>
-        </div>
-
-        <div class="navigation">
-            <button class="nav-button active">Post Job</button>
-            <button (click)="navigateToCandidates()"  class="nav-button">Candidates</button>
-            <button (click)="navigateToChat()" class="nav-button">Chat</button>
-            <button (click)=" navigateToInterview()" class="nav-button">Interviews</button>
-            <button (click)="navigateToAnalytics()"  class="nav-button">Analytics</button>
-        </div>
-
-        <div>
-            <h2>Post New Job</h2>
-            <form>
-                <div class="form-group">
-                    <label for="jobTitle">Job Title</label>
-                    <input type="text" id="jobTitle" placeholder="Job Title">
-                </div>
-
-                <div class="form-group">
-                    <label for="requiredSkills">Required Skills</label>
-                    <div class="skills-input-group">
-                        <input type="text" id="requiredSkills" placeholder="Required Skills">
-                        <button type="button" class="add-skill-button">Add Skill</button>
-                    </div>
-                    </div>
-
-                <button type="submit" class="post-job-button">Post Job</button>
-            </form>
-
-            <button class="preview-button">Preview</button>
-        </div>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h2>Employer Dashboard</h2>
+      <p>Manage your hiring process and candidate interactions</p>
     </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+      <button class="nav-button active">Post Job</button>
+      <button (click)="navigateToCandidates()" class="nav-button">
+        Candidates
+      </button>
+      <button (click)="navigateToChat()" class="nav-button">Chat</button>
+      <button (click)="navigateToInterview()" class="nav-button">
+        Interviews
+      </button>
+    </div>
+
+    <!-- Job Form -->
+    <form (ngSubmit)="onSubmit()" #jobForm="ngForm">
+      <h3>Post a New Job</h3>
+      <div class="form-group">
+        <label for="jobTitle">Job Title</label>
+        <input
+          type="text"
+          id="jobTitle"
+          name="title"
+          [(ngModel)]="job.title"
+          placeholder="Job Title"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          [(ngModel)]="job.description"
+          placeholder="Description"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          [(ngModel)]="job.company"
+          placeholder="Company Name"
+          required
+        />
+      </div>
+
+      <!-- Recruiter ID field removed since it's set automatically in the component -->
+
+      <button type="submit" class="post-job-button">Post Job</button>
+    </form>
+
+    <!-- Skill Assignment Section -->
+    <div class="skill-assignment">
+      <h3>Assign Skill to a Job</h3>
+
+      <div class="form-group">
+        <label for="selectedJob">Select Job</label>
+        <select
+          id="selectedJob"
+          name="selectedJobId"
+          [(ngModel)]="selectedJobId"
+          required
+        >
+          <option *ngFor="let job of jobs" [value]="job.id">
+            {{ job.title }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="selectedSkill">Select Skill</label>
+        <select
+          id="selectedSkill"
+          name="selectedSkillId"
+          [(ngModel)]="selectedSkillId"
+          required
+        >
+          <option *ngFor="let skill of skills" [value]="skill.id">
+            {{ skill.name }}
+          </option>
+        </select>
+      </div>
+
+      <button (click)="addSkill()">Add Skill to Job</button>
+    </div>
+  </div>
 </body>

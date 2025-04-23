@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Query,ElementRef,ViewChild } from '@angular/core';
-import { HttpClient,HttpClientModule } from '@angular/common/http';
+import { Component, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
-
 
 interface ResultItem {
   id: string;
@@ -15,48 +12,53 @@ interface ResultItem {
   company?: string;
   location?: string;
   experience?: string;
+  created_at?: string; // Add created_at to the ResultItem interface
 }
 
 interface Message {
   role: 'user' | 'ai';
   content: string;
   results?: ResultItem[];
+  isError?: boolean;
+  timestamp?: Date;
 }
-
-
 
 @Component({
   selector: 'app-ai-chat',
-  imports: [CommonModule,FormsModule,HttpClientModule],
+  standalone: true, // Mark as standalone component
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './ai-chat.component.html',
   styleUrl: './ai-chat.component.css'
 })
-export class AiChatComponent {
+export class AiChatComponent implements AfterViewChecked { // Implement AfterViewChecked
   userQuery = '';
-  chatHistory: any[] = [];
+  chatHistory: Message[] = [];
   loading = false;
 
   constructor(private http: HttpClient) {}
-  @ViewChild('chatContainer') private chatContainer!:ElementRef
 
-  ngAfterViewChecked() {
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
+
+  ngAfterViewChecked(): void { // Corrected method name
     this.scrollToBottom();
   }
 
   private scrollToBottom(): void {
     try {
       this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) {
+      // Handle potential error if chatContainer is not yet available
+    }
   }
-  
-  async submitQuery() {
+
+  async submitQuery(): Promise<void> { // Use Promise<void> for async functions
     if (!this.userQuery.trim() || this.loading) return;
 
-    // Add user message
+    // Add user message to the chat history
     this.chatHistory.push({
       role: 'user',
       content: this.userQuery,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
 
     const queryText = this.userQuery;
@@ -64,29 +66,38 @@ export class AiChatComponent {
     this.loading = true;
 
     try {
-      const response = await this.http.post<any>('YOUR_API_ENDPOINT', {
-        query: queryText
-      }).toPromise();
+      // Send the query to the backend API
+      const response = await this.http
+        .post<any>('http://54.197.174.28:3000/api/v1/analysis/ask', {
+          question:queryText,
+        })
+        .toPromise();
 
-      // Add AI response
+      // Log the response data
+      //console.log("AI Response Data:", response);
+
+      // Ensure the response data is in the expected format
+      const results: ResultItem[] = (response && response.data) || []; // Access response.data
+
+      // Add AI response with results to the chat history
       this.chatHistory.push({
         role: 'ai',
-        content: `Here's what I found for "${queryText}":`,
-        results: response.data || [],
-        timestamp: new Date()
+        content: response.aiResponse || `Here's what I found for "${queryText}":`, // Use aiResponse here
+        results: results,
+        timestamp: new Date(),
       });
-
-    } catch (error) {
+    } catch (error: any) {
       this.chatHistory.push({
         role: 'ai',
-        content: 'Hello Dickson You Are a smart developer Keep it Up But I had error fetching.',
+        content:
+          'Hello Dickson, You are a smart developer. Keep it up! But I had an error fetching the data.',
         isError: true,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
+      console.error("Error fetching data from AI:", error);
     } finally {
       this.loading = false;
-    }
-
-
-}
+    }
+  }
+  
 }

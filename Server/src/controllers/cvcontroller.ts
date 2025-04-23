@@ -3,6 +3,13 @@ import pool from '../config/db.config'
 import { asyncHandler } from '../middlewares/asyncHandler';
 import { Request,Response } from 'express';
 
+// Extend the Request interface to include the 'file' property
+interface MulterRequest extends Request {
+  file?: Express.Multer.File;
+}
+import multer from 'multer';
+import path from 'path'
+
 export const getallCvs = asyncHandler(async(req:Request,res:Response)=> {
     const id = parseInt(req.params.id);
   if (isNaN(id)) {
@@ -20,25 +27,50 @@ export const getallCvs = asyncHandler(async(req:Request,res:Response)=> {
   }
 })
 
-export const uploadCv = asyncHandler(async(req:Request,res:Response)=> {
-    const { userId, file_url, extracted_text } = req.body;
-  if (!userId || !file_url) {
-     res.status(400).json({ error: 'User ID and file URL are required' });
-     return;
+// Set up multer storage options
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Directory where CVs will be stored
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage }); // Create upload middleware
+
+// The file upload middleware will handle the file and add it to req.file
+export const uploadCv = upload.single('file');  // Handle a single file upload with field name 'file'
+
+
+export const uploadCvController = asyncHandler(async (req: Request, res: Response) => {
+  const { userId } = req.body;
+  const {  extracted_text } = req.body;
+
+  
+  // TypeScript should no longer complain about req.file
+  if (!userId || !req.file) {
+    res.status(400).json({ error: 'User ID and file are required' });
+    return;
   }
 
+  const file_url = `uploads/${req.file?.filename}`; // Path to the uploaded file
+
   const result = await pool.query(
-    'INSERT INTO cv (user_id, file_url, extracted_text) VALUES ($1, $2, $3) RETURNING *',
+    'INSERT INTO cv ("userId", file_url, extracted_text) VALUES ($1, $2, $3) RETURNING *',
     [userId, file_url, extracted_text]
   );
+  
+
   res.status(201).json(result.rows[0]);
-  return;
-})
+});
+
 
 export const getCvById = asyncHandler(async(req:Request,res:Response)=> {
     const id = parseInt(req.params.id);
   if (isNaN(id)) {
-    return res.status(400).json({ error: 'Invalid CV ID' });
+     res.status(400).json({ error: 'Invalid CV ID' });
+     return;
   }
 
   const result = await pool.query('SELECT * FROM cv WHERE id = $1', [id]);

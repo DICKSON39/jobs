@@ -4,11 +4,24 @@
     &#9776;
   </button>
   <div class="nav-links" [ngClass]="{'open': isMenuOpen}">
-    <a (click)="navigateToHome()">Home</a>
+    <a routerLink=''><i class="fas fa-home"></i></a>
     
     <div class="login">
-      <a (click)="navigateToLogin()">Log In</a>
+      <a (click)="navigateToLogin()">
+        <i class="fas fa-sign-in-alt"></i> 
+        Login
+      </a>
     </div>
-    <button routerLink="/register" class="btn purple">Register</button>
+    
+    <button routerLink="/register" class="btn purple">
+      <i class="fas fa-user-plus"></i>
+      Register
+    </button>
+    
+    <button class="btn purple" (click)="logoutUser()">
+      <i class="fas fa-sign-out-alt" ></i> 
+      Logout
+    </button>
+    
   </div>
 </nav>

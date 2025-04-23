@@ -1,70 +1,43 @@
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <span>A</span> Admin Portal
-            </div>
-            <ul class="sidebar-menu">
-                <li><a  class="active">User Management</a></li>
-                <li><a (click)="navigateToSecurityPolicy()">Security</a></li>
-                <li><a (click)="navigateToAiChecker()" >AI Performance</a></li>
-                <li><a (click)="navigateToAiMonitoring()">Ai Monitoring</a></li>
-             
-            </ul>
-        </aside>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header"><span>A</span> Admin Portal</div>
+      <ul class="sidebar-menu">
+        <li><a class="active">User Management</a></li>
+        <li><a (click)="navigateToSecurityPolicy()">Security</a></li>
+        <li><a (click)="navigateToAiChecker()">AI Performance</a></li>
+        <li><a (click)="navigateToAiMonitoring()">Ai Monitoring</a></li>
+        <li><a (click)="navigateToAnalytics()">Analytics</a></li>
+      </ul>
+    </aside>
 
-        <main class="content">
-            <div class="content-header">
-                <h2>User Management</h2>
-                <button class="add-user-button">Add User</button>
-            </div>
+    <main class="content">
+      <div class="content-header">
+        <h2>User Management</h2>
+        <!-- <button class="add-user-button">Add User</button> -->
+      </div>
 
-            <table class="user-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Role</th>
-                        <th>Company</th>
-                        <th>Status</th>
-                        <th>Last Login</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>John Smith</td>
-                        <td>Recruiter</td>
-                        <td>Tech Corp</td>
-                        <td><span class="status-badge status-active">Active</span></td>
-                        <td>2024-01-15 05:30</td>
-                        <td><button class="action-button">Deactivate</button></td>
-                    </tr>
-                    <tr>
-                        <td>Lisa Chen</td>
-                        <td>Hiring Manager</td>
-                        <td>Innovation Labs</td>
-                        <td><span class="status-badge status-active">Active</span></td>
-                        <td>2024-01-14 14:20</td>
-                        <td><button class="action-button">Deactivate</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mika Johnson</td>
-                        <td>Admin</td>
-                        <td>System Admin</td>
-                        <td><span class="status-badge status-active">Active</span></td>
-                        <td>2024-01-15 11:45</td>
-                        <td><button class="action-button">Deactivate</button></td>
-                    </tr>
-                    <tr>
-                        <td>Sarah Williams</td>
-                        <td>Recruiter</td>
-                        <td>Global HR</td>
-                        <td><span class="status-badge status-inactive">Inactive</span></td>
-                        <td>2024-01-10 16:15</td>
-                        <td><button class="action-button">Activate</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </main>
-    </div>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role?.roleName }}</td>
+            <button (click)="deleteUser(user.id)" class="add-user-button">Delete</button>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
 </body>
+

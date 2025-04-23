@@ -1,52 +1,36 @@
 <body>
-    <div class="container">
-        <h2>Available Positions</h2>
-        <p>Find your next career opportunity</p>
+  <div class="container">
+    <h2>Available Positions</h2>
+    <p>Find your next career opportunity</p>
 
-        <div class="search-bar">
-            <input type="text" placeholder="Search jobs or companies">
-            <select>
-                <option>All Types</option>
-            </select>
-            <select>
-                <option>All Locations</option>
-            </select>
-        </div>
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search jobs or companies"
+        [(ngModel)]="searchTerm"
+        (input)="filterJobs()"
+      />
 
-        <div class="job-listing">
-            <div class="job-details">
-                <div class="job-title">Senior Frontend Developer</div>
-                <div class="company">Tech Corp Remote Full - time</div>
-                <div class="salary">$120k - $150k</div>
-            </div>
-            <div class="job-actions">
-                <div class="posted-date">2d ago</div>
-                <button class="view-details-button">View Details</button>
-            </div>
-        </div>
+      <select [(ngModel)]="sortOption" (change)="sortJobs()">
+        <option value="">Sort by</option>
+        <option value="title">Title (A-Z)</option>
+        <option value="company">Company (A-Z)</option>
+      </select>
 
-        <div class="job-listing">
-            <div class="job-details">
-                <div class="job-title">Product Manager</div>
-                <div class="company">InnovateLabs Hybrid Full - time</div>
-                <div class="salary">$130k - $160k</div>
-            </div>
-            <div class="job-actions">
-                <div class="posted-date">1d ago</div>
-                <button class="view-details-button">View Details</button>
-            </div>
-        </div>
-
-        <div class="job-listing">
-            <div class="job-details">
-                <div class="job-title">DevOps Engineer</div>
-                <div class="company">CloudTech Remote Contract</div>
-                <div class="salary">$140k - $170k</div>
-            </div>
-            <div class="job-actions">
-                <div class="posted-date">3d ago</div>
-                <button class="view-details-button">View Details</button>
-            </div>
-        </div>
+     
     </div>
+
+    <div class="job-listing" *ngFor="let job of filteredJobs">
+      <div class="job-details">
+        <div class="job-title">{{ job.title }}</div>
+        <div class="company">{{ job.company }}</div>
+        <div class="salary">{{ job.description }}</div>
+      </div>
+      <div class="job-actions">
+        <button class="view-details-button" [routerLink]="['/job', job.id]">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
 </body>

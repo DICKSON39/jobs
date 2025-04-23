@@ -2,9 +2,18 @@
     <h2>CV Upload</h2>
     <p>Upload your CV to enhance your job application process</p>
     <div class="upload-area">
-        <p>Drag and drop your CV here or click to browse</p>
-        <label for="cv-upload" class="upload-button">Select File</label>
-        <input type="file" id="cv-upload" accept=".pdf, .doc, .docx" class="file-input" style="display: none;">
-        <div id="file-name"></div>
+      <p>Drag and drop your CV here or click to browse</p>
+      <label for="cv-upload" class="upload-button">Select File</label>
+      <input
+        type="file"
+        id="cv-upload"
+        accept=".pdf, .doc, .docx"
+        (change)="onFileSelected($event)"
+        class="file-input"
+        style="display: none"
+      />
+      <div id="file-name">{{ fileName }}</div>
+      <button (click)="uploadCv()">Upload CV</button>
     </div>
-</div>
+  </div>
+  

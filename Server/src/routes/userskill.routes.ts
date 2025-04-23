@@ -1,9 +1,9 @@
 import express from 'express';
-import { createUserSkill, deleteUserSkill, getAllUserSkills, getSkillsByUser, getUsersBySkill, getUserSkillById, updateUserSkill } from '../controllers/UserSkillController';
+import { createUserSkill, deleteUserSkill, getAllUserSkills, getSkillsByUser, getUsersBySkill,  getUserSkillsByUserId,  updateUserSkill } from '../controllers/UserSkillController';
 const router = express.Router();
 
-router.get('/user-skills', getAllUserSkills);
-router.get('/user-skills/:id', getUserSkillById);
+router.get('/users/user-skills', getAllUserSkills);
+router.get('/user-skills/:userId',getUserSkillsByUserId);
 router.post('/user-skills', createUserSkill);
 router.put('/user-skills/:id', updateUserSkill);
 router.delete('/user-skills/:id', deleteUserSkill);

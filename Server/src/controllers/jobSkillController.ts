@@ -8,6 +8,8 @@ export const addSkillToJob = asyncHandler(
     const jobId = parseInt(req.body.jobId);
     const skillId = parseInt(req.body.skillId);
 
+    //console.log(`Received jobId: ${jobId}, skillId: ${skillId}`);
+
     if (isNaN(jobId) || isNaN(skillId)) {
       res.status(400).json({ error: "Invalid Job ID or Skill ID" });
       return;
@@ -15,7 +17,7 @@ export const addSkillToJob = asyncHandler(
     
 
     const checkResult = await pool.query(
-      "SELECT * FROM job_skill WHERE job_id = $1 AND skill_id = $2",
+      'SELECT * FROM job_skill WHERE "jobId" = $1 AND "skillId" = $2',
       [jobId, skillId]
     );
 
@@ -28,8 +30,8 @@ export const addSkillToJob = asyncHandler(
    
 
     const result = pool.query(
-      "INSERT INTO job_skill (job_id,skill_id) VALUES ($1,$2) RETURNING *",
-      [jobId, skillId]
+      'INSERT INTO job_skill ("jobId", "skillId") VALUES ($1, $2) RETURNING *',
+  [jobId, skillId]
     );
     res.status(201).json((await result).rows[0]);
     return;

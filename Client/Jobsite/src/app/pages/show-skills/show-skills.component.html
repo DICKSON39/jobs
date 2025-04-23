@@ -1,0 +1,13 @@
+<div *ngIf="userSkills && userSkills.length > 0">
+    <h2>Your Skills</h2>
+    <ul>
+      <li *ngFor="let skill of userSkills">
+        {{ skill.skillname }} - {{ skill.yearsExperience }} year(s)
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="userSkills && userSkills.length === 0">
+    <p>No skills found.</p>
+  </div>
+  

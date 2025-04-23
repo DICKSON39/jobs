@@ -21,9 +21,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
- getUsers() {
-  return this.http.get(`${this.apiUrl}/users`,{
+ getUsers():Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/user`,{
     withCredentials:true
   })
  }
+ deleteUser(userId: number): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/users/${userId}`);
+}
 }

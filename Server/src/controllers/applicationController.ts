@@ -5,15 +5,20 @@ import { UserRequest } from "../utils/types/user";
 import { User } from "../entity/User";
 
 export const Application = asyncHandler(async(req:UserRequest,res:Response,next:NextFunction)=> {
-   if (!req.user) {
-    res.status(401).json({message: "Not authorized!"})
-    return
-   }
+//    if (!req.user) {
+//     res.status(401).json({message: "Not authorized!"})
+//     return
+//    }
 
-   const {userId} = req.body
-   const {jobId} = req.params
+   const {userId }= req.body;
+   const {jobId} = req.params;
 
-   const result = await pool.query("INSERT INTO application (user_id) VALUES($1) RETURNING*",[userId,jobId]);
+   
+  if (!userId || !jobId) {
+    return res.status(400).json({ message: "Missing userId or jobId" });
+  }
+
+   const result = await pool.query("INSERT INTO application (user_id,job_id) VALUES($1,$2) RETURNING*",[userId,jobId]);
 
    const application = result.rows[0];
    res.status(201).json({
@@ -25,15 +30,37 @@ export const Application = asyncHandler(async(req:UserRequest,res:Response,next:
 
 })
 
-export const getApplication = asyncHandler(async(req:Request,res:Response)=> {
-    // if (!req.user) {
-    //     res.status(401).json({message: "Not authorized!"})
-    //    }
-    const result = await pool.query("SELECT * FROM application ORDER BY id ASC")     
-    res.status(200).json({
-        message: "Applications Available",
-        applications: result.rows[0]
-    })
-    return
+
+export const getApplication = asyncHandler(async (req: Request, res: Response) => {
+  const result = await pool.query(`
+      SELECT 
+          application.id,
+          application.status,
+          "application"."appliedAt",
+          "user".name AS user_name,
+          "user".email AS user_email,
+          job.title AS job_title
+      FROM application
+      JOIN "user" ON application.user_id = "user".id
+      JOIN job ON application.job_id = job.id
+      ORDER BY application.id ASC
+  `)
+
+  res.status(200).json({
+      message: "Applications Available",
+      applications: result.rows
+  })
+  return;
 })
 
+
+export const getApplicationsByUserId = asyncHandler(async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId);
+  if (isNaN(userId)) {
+     res.status(400).json({ error: 'Invalid user ID' });
+     return;
+  }
+
+  const result = await pool.query('SELECT * FROM applications WHERE user_id = $1', [userId]);
+  res.status(200).json(result.rows);
+});

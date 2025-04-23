@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { AppDataSource } from '../config/data-source';
 import { User } from '../entity/User';
 import { Role } from '../entity/Roles';
+import pool from '../config/db.config';
 
 const userRepository = AppDataSource.getRepository(User);
 const roleRepository = AppDataSource.getRepository(Role);
@@ -58,6 +59,31 @@ export class UserController {
 
 }
 
+
+export const getUserProfile = async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.userId);
+  
+    if (isNaN(userId)) {
+      res.status(400).json({ error: 'Invalid user ID' });
+      return;
+    }
+  
+    try {
+        const result = await pool.query(
+            `SELECT "id", "name", "email", "role_id", "created_at" FROM "user" WHERE "id" = $1`,
+            [userId])
+            
+  
+      if (result.rows.length > 0) {
+        res.status(200).json(result.rows[0]);
+        return;
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  };
 
 
  

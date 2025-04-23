@@ -6,7 +6,7 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 100vh;
+  /* Remove fixed height for better responsiveness */
 }
 
 .advisor-header {
@@ -123,10 +123,11 @@
   height: 100%;
   background-color: #28a745; /* Example progress color */
   border-radius: 4px;
+  width: var(--progress-width); /* Use a CSS variable for dynamic width */
 }
 
 .progress-bar::after {
-  content: attr(style);
+  content: attr(data-label); /* Use a data attribute for the label */
   position: absolute;
   top: 0;
   right: 5px;

@@ -3,10 +3,11 @@ import { addSkillToJob, getSkillsForJob, removeSkillFromJob } from '../controlle
 
 const router = express.Router();
 
-router.post('/jobs/skills',addSkillToJob);
+router.post('/job-skills',addSkillToJob);
 
-router.get('/jobs/:jobId/skills',getSkillsForJob);
+router.get('/:jobId/',getSkillsForJob);
 
 router.delete('/jobs/:jobId/skills/:skillId',removeSkillFromJob)
 
 export default router
+

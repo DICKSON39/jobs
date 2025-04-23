@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Application } from "./Apllication";
 
 
@@ -8,6 +8,7 @@ export class Interview {
   id!: number;
 
   @ManyToOne(() => Application)
+  @JoinColumn({ name: 'application_id' })
   application!: Application;
 
   @Column()

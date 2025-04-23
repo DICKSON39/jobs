@@ -1,6 +1,6 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  ManyToOne, CreateDateColumn
+  ManyToOne, CreateDateColumn,JoinColumn
 } from "typeorm";
 import { User } from "./User";
 import { Job } from "./Job";
@@ -11,9 +11,11 @@ export class Application {
   id!: number;
 
   @ManyToOne(() => User, (user) => user.applications)
+  @JoinColumn({ name: "user_id" }) // ✅ snake_case
   user!: User;
 
   @ManyToOne(() => Job, (job) => job.applications)
+  @JoinColumn({ name: "job_id" }) // ✅ snake_case
   job!: Job;
 
   @Column({ type: "varchar", default: "pending" })

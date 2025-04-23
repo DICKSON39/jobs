@@ -1,180 +1,159 @@
 body {
-    font-family: sans-serif;
-    margin: 10px; /* Adjust overall margin for smaller screens */
-    background-color: #f4f4f4;
-  }
-  
-  .container {
-    height: 100vh;
-    background-color: #fff;
-    padding: 15px; /* Adjust padding for smaller screens */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 100%; /* Make container full width on smaller screens */
-    margin: 10px auto; /* Adjust margin for smaller screens */
-  }
-  
-  h2 {
-    color: #333;
-    margin-bottom: 10px; /* Adjust margin for smaller screens */
-    font-size: 1.3em; /* Adjust font size for smaller screens */
-  }
-  
-  p {
-    color: #666;
-    font-size: 0.85em; /* Adjust font size for smaller screens */
-    margin-bottom: 15px; /* Adjust margin for smaller screens */
-  }
-  
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+
+p {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input[type="text"],
+.search-bar select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.job-listing {
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.job-details {
+  margin-bottom: 10px;
+}
+
+.job-title {
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.company {
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9em;
+  margin-bottom: 3px;
+}
+
+.location,
+.salary {
+  color: #777;
+  font-size: 0.85em;
+  margin-top: 2px;
+}
+
+.posted-date {
+  color: #999;
+  font-size: 0.75em;
+  margin-top: 5px;
+}
+
+.job-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.view-details-button {
+  background-color: #6750a4;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-button:hover {
+  background-color: #4d3a8b;
+}
+
+/* Responsive Design */
+
+/* Small screens */
+@media (max-width: 600px) {
   .search-bar {
-    display: flex;
-    flex-direction: column; /* Stack elements on smaller screens */
-    margin-bottom: 15px; /* Adjust margin for smaller screens */
+    flex-direction: column;
   }
-  
-  .search-bar input[type="text"] {
-    flex-grow: 1;
-    padding: 8px; /* Adjust padding for smaller screens */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 0; /* Remove right margin for stacked layout */
-    margin-bottom: 8px; /* Add bottom margin for stacked layout */
-    width: 100%; /* Make input full width */
-    box-sizing: border-box; /* Ensure padding and border are included in width */
-  }
-  
-  .search-bar select {
-    padding: 8px; /* Adjust padding for smaller screens */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 0; /* Remove right margin for stacked layout */
-    width: 100%; /* Make select full width */
-    box-sizing: border-box; /* Ensure padding and border are included in width */
-  }
-  
-  .job-listing {
-    border: 1px solid #eee;
-    padding: 10px; /* Adjust padding for smaller screens */
-    margin-bottom: 10px; /* Adjust margin for smaller screens */
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column; /* Stack details and actions on smaller screens */
-    justify-content: space-between;
-    align-items: flex-start; /* Align items to the start on smaller screens */
-  }
-  
-  .job-details {
-    flex-grow: 1;
-    margin-bottom: 10px; /* Add margin for spacing on smaller screens */
-  }
-  
-  .job-title {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 3px; /* Adjust margin for smaller screens */
-    font-size: 1em; /* Adjust font size for smaller screens */
-  }
-  
-  .company {
-    color: #777;
-    font-size: 0.8em; /* Adjust font size for smaller screens */
-    margin-bottom: 2px; /* Adjust margin for smaller screens */
-  }
-  
-  .location {
-    color: #777;
-    font-size: 0.8em; /* Adjust font size for smaller screens */
-  }
-  
-  .salary {
-    color: #555;
-    font-size: 0.85em; /* Adjust font size for smaller screens */
-    margin-top: 3px; /* Adjust margin for smaller screens */
-  }
-  
+
   .job-actions {
-    display: flex;
-    align-items: flex-start; /* Align to the start on smaller screens */
-    width: 100%; /* Make actions take full width */
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 10px;
   }
-  
+
   .view-details-button {
-    background-color: #6750a4;
-    color: white;
-    border: none;
-    padding: 6px 12px; /* Adjust padding for smaller screens */
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8em; /* Adjust font size for smaller screens */
-    margin-right: 5px; /* Add some spacing between buttons */
+    width: 100%;
   }
-  
-  .posted-date {
-    color: #999;
-    font-size: 0.7em; /* Adjust font size for smaller screens */
-    margin-bottom: 0; /* Adjust margin for smaller screens */
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 601px) and (max-width: 768px) {
+  .search-bar {
+    flex-direction: row;
+    align-items: center;
   }
-  
-  /* Media query for small devices (up to 600px) */
-  @media (max-width: 600px) {
-    .search-bar {
-      flex-direction: column;
-    }
-  
-    .job-listing {
-      flex-direction: column;
-      align-items: stretch; /* Make elements full width */
-    }
-  
-    .job-actions {
-      flex-direction: row; /* Display buttons in a row on small screens */
-      align-items: center;
-      justify-content: space-between; /* Space out buttons */
-      margin-top: 10px; /* Add some top margin for actions */
-    }
-  
-    .view-details-button {
-      flex-grow: 1; /* Make buttons take equal width */
-      margin-right: 5px;
-      margin-bottom: 0;
-    }
-  
-    .posted-date {
-      text-align: left; /* Align to the left */
-    }
+
+  .search-bar input[type="text"] {
+    margin-right: 10px;
   }
-  
-  /* Media query for slightly larger small devices (up to 768px) */
-  @media (min-width: 601px) and (max-width: 768px) {
-    .search-bar {
-      flex-direction: row; /* Keep elements in a row on larger phones/small tablets */
-      align-items: center;
-    }
-  
-    .search-bar input[type="text"] {
-      margin-bottom: 0; /* Remove bottom margin */
-      margin-right: 10px; /* Add right margin */
-    }
-  
-    .job-listing {
-      flex-direction: row; /* Keep details and actions in a row */
-      align-items: center;
-    }
-  
-    .job-actions {
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-end;
-      width: auto; /* Adjust width */
-    }
-  
-    .view-details-button {
-      margin-right: 10px;
-      
-      flex-grow: 0; /* Reset flex-grow */
-    }
-  
-    .posted-date {
-      text-align: right; /* Align to the right */
-    }
+
+  .job-listing {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
   }
+
+  .job-details {
+    flex: 2;
+    margin-bottom: 0;
+  }
+
+  .job-actions {
+    flex: 1;
+    justify-content: flex-end;
+  }
+}

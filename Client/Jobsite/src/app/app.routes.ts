@@ -21,6 +21,8 @@ import { AICareerPathComponent } from './pages/aicareer-path/aicareer-path.compo
 import { AiChatComponent } from './pages/ai-chat/ai-chat.component';
 import { AdminSecurityComponent } from './pages/admin-security/admin-security.component';
 import { MonitoringAiComponent } from './pages/monitoring-ai/monitoring-ai.component';
+import { JobDetailsComponent } from './pages/job-details/job-details.component';
+import { ShowSkillsComponent } from './pages/show-skills/show-skills.component';
 
 export const routes: Routes = [
     {path: '', component: LandingPageComponent},
@@ -44,7 +46,11 @@ export const routes: Routes = [
     {path:'notifications',component:NotificationsComponent},
     {path:'careerPath',component:AICareerPathComponent},
     {path: 'adminSecurity',component:AdminSecurityComponent},
-    {path: 'adminAiMonitoring',component:MonitoringAiComponent}
+    {path: 'adminAiMonitoring',component:MonitoringAiComponent},
+    {path: 'job/:id',component: JobDetailsComponent},
+    {path:'job-detail/:id',component:JobDetailsComponent},
+    {path:'user/user-skills/:id',component:ShowSkillsComponent},
+    
 
    
 ];

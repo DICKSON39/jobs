@@ -25,21 +25,34 @@ export const getInterviewById = asyncHandler(async(req:Request,res:Response)=>{
     }
 })
 
-export const createInterview = asyncHandler(async(req:Request,res:Response)=> {
-    const { applicationId, scheduledDate, status, notes } = req.body;
+export const createInterview = asyncHandler(async (req: Request, res: Response) => {
+  const { applicationId, scheduledDate, status = 'scheduled', notes } = req.body;
+  console.log('📦 Received interview:', { applicationId, scheduledDate, status, notes });
+
+  // Check if applicationId and scheduledDate are provided
   if (!applicationId || !scheduledDate) {
-     res.status(400).json({ error: 'Application ID and scheduled date are required' });
-     return;
+    
+    res.status(400).json({ error: 'Application ID and scheduled date are required' });
+    return;
   }
 
-  const result = await pool.query(
-    'INSERT INTO interview (application_id, scheduled_date, status, notes) VALUES ($1, $2, $3, $4) RETURNING *',
-    [applicationId, scheduledDate, status || 'scheduled', notes]
-  );
-  res.status(201).json(result.rows[0]);
-  return;
+  try {
+    // Ensure scheduledDate is in ISO format (if necessary)
+    const isoScheduledDate = new Date(scheduledDate).toISOString(); // Convert to ISO if it's not already
 
-})
+    // Query to insert into the interview table
+    const result = await pool.query(
+      'INSERT INTO interview (application_id, "scheduledDate", status, notes) VALUES ($1, $2, $3, $4) RETURNING *',
+      [applicationId, isoScheduledDate, status, notes || 'No notes provided'] // Default notes if none are provided
+    );
+
+    // Respond with the newly created interview
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error('Error creating interview:', err);
+    res.status(500).json({ error: 'Failed to create interview' });
+  }
+});
 
 
 export const updateInterview = asyncHandler(async(req:Request,res:Response)=> {
@@ -51,7 +64,7 @@ export const updateInterview = asyncHandler(async(req:Request,res:Response)=> {
   }
 
   if (!applicationId || !scheduledDate || !status) {
-     res.status(400).json({ error: 'Application ID, scheduled date, and status are required' });
+     res.status(400).json({ error: 'Application ID, "scheduledDate", and status are required' });
      return;
   }
 

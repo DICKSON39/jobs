@@ -13,7 +13,7 @@ import { FooterComponent } from './pages/landing-page/footer/footer.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
+  
 
   
   constructor(private router:Router){}

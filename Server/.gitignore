@@ -4,6 +4,9 @@
 # Build output
 /dist
 
+/uploads
+
+
 
 # TypeScript build info
 *.tsbuildinfo

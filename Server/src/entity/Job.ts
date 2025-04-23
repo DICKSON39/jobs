@@ -1,6 +1,7 @@
 import {
   Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,
-  ManyToOne, OneToMany
+  ManyToOne, OneToMany,
+  JoinColumn
 } from "typeorm";
 import { User } from "./User";
 
@@ -25,8 +26,10 @@ export class Job {
   @CreateDateColumn()
   postedAt!: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { eager: true })
+  @JoinColumn({ name: 'recruiterid' }) // lowercase to match PostgreSQL
   recruiter!: User;
+  
 
   @OneToMany(() => JobSkill, (jobSkill) => jobSkill.job)
   skills!: JobSkill[];

@@ -1,117 +1,110 @@
 <div class="database-assistant-container">
-    <div class="header">
-      <div class="avatar-container">
-        
+  <div class="header">
+    <div class="avatar-container">
       </div>
-      <div>
-        <h2 class="header-title">Database Assistant</h2>
-        <p class="header-subtitle">Powered by AI</p>
+    <div>
+      <h2 class="header-title">Database Assistant</h2>
+      <p class="header-subtitle">Powered by AI</p>
+    </div>
+  </div>
+
+  <div #chatContainer class="chat-container">
+    <div class="message-row">
+      <div class="avatar-container ai">
+        </div>
+      <div class="message-bubble ai-intro">
+        <p class="message-text">
+          Hi! I'm your database assistant. How can I help you?
+        </p>
       </div>
     </div>
-  
-    <div #chatContainer class="chat-container">
-      <div class="message-row">
-        <div class="avatar-container ai">
-          
-        </div>
-        <div class="message-bubble ai-intro">
-          <p class="message-text">
-            Hi! I'm your database assistant. How can I help you?
-          </p>
-        </div>
-      </div>
-  
+
+    <div
+      *ngFor="let message of chatHistory"
+      class="message-row"
+      [ngClass]="{'user-message': message.role === 'user'}"
+    >
       <div
-        *ngFor="let message of chatHistory"
-        class="message-row"
-        [ngClass]="{'user-message': message.role === 'user'}"
+        class="avatar-container ai"
+        *ngIf="message.role === 'ai'"
       >
-        <div
-          class="avatar-container ai"
-          *ngIf="message.role === 'ai'"
-        >
-          
         </div>
-  
-        <div
-          class="avatar-container user"
-          *ngIf="message.role === 'user'"
-        >
-          
+
+      <div
+        class="avatar-container user"
+        *ngIf="message.role === 'user'"
+      >
         </div>
-  
+
+      <div
+        class="message-bubble"
+        [ngClass]="{'ai-message': message.role === 'ai', 'user-message-bubble': message.role === 'user'}"
+      >
+        <p class="message-content">
+          {{ message.content }}
+        </p>
+
         <div
-          class="message-bubble"
-          [ngClass]="{'ai-message': message.role === 'ai', 'user-message-bubble': message.role === 'user'}"
+          *ngIf="message.results?.length"
+          class="results-container"
         >
-          <p class="message-content">
-            {{ message.content }}
-          </p>
-  
-          <div
-            *ngIf="message.results?.length"
-            class="results-container"
-          >
-            <div class="results-grid">
-              <div
-                *ngFor="let item of message.results"
-                class="result-item"
-              >
-                <div class="result-header">
-                  
-                  <div>
-                    <p class="result-name">
-                      {{ item.name || item.title }}
-                    </p>
-                    <p class="result-details">
-                      {{ item.email || item.company }}
-                    </p>
-                  </div>
+          <div class="results-grid">
+            <div
+              *ngFor="let item of message.results"
+              class="result-item"
+            >
+              <div class="result-header">
+                <div>
+                  <p class="result-name">
+                    {{ item.name || item.title }}
+                  </p>
+                  <p class="result-details">
+                    {{ item.email || item.company }}
+                  </p>
                 </div>
-                <div class="skills-container">
-                  <span
-                    *ngFor="let skill of item.skills"
-                    class="skill-tag"
-                  >
-                    {{ skill }}
-                  </span>
-                </div>
+              </div>
+              <div class="skills-container">
+                <span
+                  *ngFor="let skill of item.skills"
+                  class="skill-tag"
+                >
+                  {{ skill }}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-  
-      <div *ngIf="loading" class="message-row">
-        <div class="avatar-container ai">
-          
-        </div>
-        <div class="loading-indicator-container">
-          <div class="loading-dot"></div>
-          <div class="loading-dot" style="animation-delay: 0.2s"></div>
-          <div class="loading-dot" style="animation-delay: 0.4s"></div>
-        </div>
-      </div>
     </div>
-  
-    <div class="input-area">
-      <div class="input-wrapper">
-        <textarea
-          [(ngModel)]="userQuery"
-          placeholder="How can I help?..."
-          (keyup.enter)="submitQuery()"
-          [disabled]="loading"
-          class="input-field"
-          rows="1"
-        ></textarea>
-        <button
-          (click)="submitQuery()"
-          [disabled]="loading"
-          class="send-button"
-        >
-          
-          <p class="send-text">Send</p>
-        </button>
+
+    <div *ngIf="loading" class="message-row">
+      <div class="avatar-container ai">
+        </div>
+      <div class="loading-indicator-container">
+        <div class="loading-dot"></div>
+        <div class="loading-dot" style="animation-delay: 0.2s"></div>
+        <div class="loading-dot" style="animation-delay: 0.4s"></div>
       </div>
     </div>
   </div>
+
+  <div class="input-area">
+    <div class="input-wrapper">
+      <textarea
+        [(ngModel)]="userQuery"
+        placeholder="How can I help?..."
+        (keyup.enter)="submitQuery()"
+        [disabled]="loading"
+        class="input-field"
+        rows="1"
+      ></textarea>
+      <button
+        (click)="submitQuery()"
+        [disabled]="loading"
+        class="send-button"
+      >
+        <p class="send-text">Send</p>
+      </button>
+    </div>
+  </div>
+</div>
