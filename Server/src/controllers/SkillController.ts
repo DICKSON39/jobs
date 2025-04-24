@@ -10,20 +10,23 @@ export const getAllSkills = asyncHandler(async(req:Request,res:Response)=> {
    return;
 })
 
-export const getSkillById = asyncHandler(async(req:Request,res:Response)=> {
+export const getSkillById = asyncHandler(async (req: Request, res: Response) => {
     const skillId = parseInt(req.params.id);
-    if(isNaN(skillId)) {
-        res.status(400).json({error: 'Invalid skill ID'});
-
-        const result = await pool.query("SELECT * FROM skill WHERE id=$1", [skillId]);
-
-        if(result.rows.length > 0) {
-            res.status(200).json(result.rows);
-        }
+  
+    if (isNaN(skillId)) {
+      res.status(400).json({ error: "Invalid skill ID" });
+      return;
     }
-
-
-})
+  
+    const result = await pool.query("SELECT * FROM skill WHERE id = $1", [skillId]);
+  
+    if (result.rows.length > 0) {
+      res.status(200).json(result.rows[0]); 
+      // return a single skill, not an array 
+    } else {
+      res.status(404).json({ error: "Skill not found" });
+    }
+  });
 
 export const createSkill = asyncHandler(async(req:Request,res:Response)=> {
     const {name} = req.body;

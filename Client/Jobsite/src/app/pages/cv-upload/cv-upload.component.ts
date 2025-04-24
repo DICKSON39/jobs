@@ -34,9 +34,9 @@ export class CvUploadComponent {
     formData.append('file',this.selectedFile);
     formData.append('userId',this.userId);
     
-    this.http.post<any>('http://54.197.174.28:3000/api/v1/cvs', formData).subscribe({
+    this.http.post<any>('http://3.83.129.250:3000/api/v1/cv/cvs', formData).subscribe({
       next: (response) => {
-        console.log('Upload successful:', response);
+        //console.log('Upload successful:', response);
         alert('CV uploaded successfully!');
       },
       error: (error) => {

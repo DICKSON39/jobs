@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VTIMEZONE
+TZID:Africa/Nairobi
+X-LIC-LOCATION:Africa/Nairobi
+BEGIN:STANDARD
+TZOFFSETFROM:+0300
+TZOFFSETTO:+0300
+TZNAME:GMT+3
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=Africa/Nairobi:20250424T191500
+DTEND;TZID=Africa/Nairobi:20250424T193000
+DTSTAMP:20250423T072811Z
+ORGANIZER;CN=Jonathan Ndambuki:mailto:joendambuki16@gmail.com
+UID:supifpebvf4hmicpn4c0vlb7uk@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE
+ ;CN=Jonathan Ndambuki;X-NUM-GUESTS=0:mailto:joendambuki16@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE
+ ;CN=dicksonndumia19@gmail.com;X-NUM-GUESTS=0:mailto:dicksonndumia19@gmail.c
+ om
+X-GOOGLE-CONFERENCE:https://meet.google.com/tvd-bcub-rth
+X-MICROSOFT-CDO-OWNERAPPTID:966684364
+CREATED:20250423T072804Z
+DESCRIPTION:<b>Booked by</b>\nDickson Ndumia\ndicksonndumia19@gmail.com\n<b
+ r>Project presentation\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~
+ :~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet: https://meet
+ .google.com/tvd-bcub-rth\n\nLearn more about Meet at: https://support.googl
+ e.com/a/users/answer/9282720\n\nPlease do not edit this section.\n-::~:~::~
+ :~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~
+ ::-
+LAST-MODIFIED:20250423T072809Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Presentation Schedule (Dickson Ndumia)
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './jobseeker.component.css'
 })
 export class JobseekerComponent implements OnInit {
+applications: any;
  constructor (private router:Router,private http:HttpClient,private authService:AuthService) {}
 
  
@@ -32,6 +33,9 @@ export class JobseekerComponent implements OnInit {
   }
   navigateToCareerPath(){
     this.router.navigate(['/careerPath']);
+  }
+  navigateToChat(){
+    this.router.navigate(['/chat'])
   }
 
   navigateToshowSkills(){

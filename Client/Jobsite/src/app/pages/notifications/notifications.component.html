@@ -1,32 +1,16 @@
-<div class="notifications-container">
-  <div class="notifications-header">
-    <h2>Notifications</h2>
-    <span class="unread-count">{{ unreadCount }} unread</span>
+<!-- interview-notifications.component.html -->
+<div class="container mx-auto p-4">
+  <h2 class="text-xl font-bold mb-4">Interview Notifications</h2>
 
+  <div *ngIf="notifications.length === 0" class="text-gray-500">
+    No interviews found.
   </div>
 
-  <!-- Notification Message -->
-  <div *ngIf="notificationMessage" class="notification">
-    <div class="notification-content">
-      <p class="notification-title">New Interview Scheduled</p>
-      <p class="notification-details">{{ notificationMessage }}</p>
-      <p class="notification-time">Just now</p>
-    </div>
+  <div *ngFor="let interview of notifications" class="border p-4 mb-4 rounded shadow-sm">
+    <p><strong>Job:</strong> {{ interview.jobTitle }} at {{ interview.company }}</p>
+    <p><strong>Scheduled At:</strong> {{ interview.scheduledAt | date: 'medium' }}</p>
+    <p><strong>Location:</strong> {{ interview.location }}</p>
+    <p><strong>Mode:</strong> {{ interview.mode }}</p>
+    <p><strong>Recruiter:</strong> {{ interview.recruiterName }} ({{ interview.recruiterEmail }})</p>
   </div>
-
-  <button class="mark-all-read" (click)="markAllAsRead()">Mark all as read</button>
-</div>
-
-<!-- Interview Data Display -->
-<div class="interview-container">
-  <h2>Interviews</h2>
-  <ul class="interview-list">
-    <li *ngFor="let interview of interviews" class="interview">
-      <div class="interview-details">
-        <p><strong>Scheduled Date:</strong> {{ interview.scheduledDate | date: 'short' }}</p>
-        <p><strong>Status:</strong> {{ interview.status }}</p>
-        <p><strong>Notes:</strong> {{ interview.notes }}</p>
-      </div>
-    </li>
-  </ul>
 </div>

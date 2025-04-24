@@ -17,6 +17,7 @@ import interviewroutes from "./routes/interview.routes";
 import userSkillRoutes from "./routes/userskill.routes";
 import { createDefaultRoles } from "./seeders/roleSeeder";
 import analysisRoutes from "./routes/analysis.routes";
+import careerSuggestions from './routes/aiSuggestion.routes'
 
 dotenv.config();
 const app = express();
@@ -65,6 +66,7 @@ app.use("/api/v1/interviews", interviewroutes);      // /interviews/*
 app.use("/api/v1/user-skills", userSkillRoutes);     // /user-skills/*
 app.use("/api", jobRoutes);                  // /jobs/*
 app.use("/api/v1/analysis", analysisRoutes);         // /analysis/*
+app.use('/api/v1',careerSuggestions)
 
 
 

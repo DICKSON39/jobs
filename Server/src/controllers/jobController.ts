@@ -23,11 +23,28 @@ export const addJob = asyncHandler(async(req:JobRequest,res:Response)=> {
 })
 
 
-export const getAllJobs = asyncHandler(async(req:Request,res:Response)=> {
-  console.log("Jobs fetched")
-    const result = await pool.query("SELECT * FROM job");
-    res.status(200).json(result.rows)
-})
+export const getAllJobs = asyncHandler(async(req: Request, res: Response) => {
+  console.log("Jobs with skills fetched");
+
+  // Fetching all jobs along with the required skills
+  const result = await pool.query(`
+    SELECT 
+      j.id, 
+      j.title, 
+      j.description, 
+      j.company, 
+      j."postedAt", 
+      j.recruiterid,
+      array_agg(s.name) AS required_skills
+    FROM job j
+    LEFT JOIN job_skill js ON j.id = js."jobId"
+    LEFT JOIN skill s ON js."skillId" = s.id
+    GROUP BY j.id
+  `);
+
+  res.status(200).json(result.rows);
+});
+
 
 
 export const updateJob = asyncHandler(async (req: Request, res: Response) => {

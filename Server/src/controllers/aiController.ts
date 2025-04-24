@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import { asyncHandler } from "../middlewares/asyncHandler";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-
+import { Skill } from "../entity/Skill";
+import { UserSkill } from "../entity/UserSkill";
+import { JobSkill } from "../entity/JobSkill";
 import { User } from "../entity/User";
 import { Application } from "../entity/Apllication";
 import { Job } from "../entity/Job";
@@ -32,25 +34,27 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
     });
 
     // Fetch all application data from the database
-    const allApplications = await AppDataSource.getRepository(Application).find({
-      relations: ["user", "job"],
-      select: {
-        id: true,
-        user: {
+    const allApplications = await AppDataSource.getRepository(Application).find(
+      {
+        relations: ["user", "job"],
+        select: {
           id: true,
-          name: true,
-          email: true,
+          user: {
+            id: true,
+            name: true,
+            email: true,
+          },
+          job: {
+            id: true,
+            title: true,
+            description: true,
+          },
+          status: true,
+          matchScore: true,
+          appliedAt: true,
         },
-        job: {
-          id: true,
-          title: true,
-          description: true,
-        },
-        status: true,
-        matchScore: true,
-        appliedAt: true,
-      },
-    });
+      }
+    );
 
     // Fetch all job data from the database
     const allJobs = await AppDataSource.getRepository(Job).find({
@@ -65,14 +69,16 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
           id: true,
           name: true,
           email: true,
-        },skills: {
+        },
+        skills: {
           id: true,
-          skill: { // Access Skill related properties
+          skill: {
+            // Access Skill related properties
             id: true,
             name: true, // Assuming `Skill` has a `name` property
           },
         },
-        
+
         applications: {
           id: true,
           user: {
@@ -83,6 +89,18 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
           matchScore: true,
         },
       },
+    });
+
+    const allSkills = await AppDataSource.getRepository(Skill).find({
+      relations: ["userSkills", "jobSkills"],
+    });
+
+    const allUserSkills = await AppDataSource.getRepository(UserSkill).find({
+      relations: ["user", "skill"],
+    });
+
+    const allJobSkills = await AppDataSource.getRepository(JobSkill).find({
+      relations: ["job", "skill"],
     });
 
     // Prepare the prompt with the fetched data
@@ -98,9 +116,19 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
       Applications:
       ${JSON.stringify(allApplications, null, 2)}
 
+       Skills:
+  ${JSON.stringify(allSkills, null, 2)}
+
+  UserSkills:
+  ${JSON.stringify(allUserSkills, null, 2)}
+
+  JobSkills:
+  ${JSON.stringify(allJobSkills, null, 2)}
+
       Here is a question about this data: ${question}
 
       Please provide a concise answer to the question. If the question asks for information about specific users, jobs, or applications, identify those from the provided data and include their relevant details in your answer. Avoid suggesting deletions or updates.
+      If the question is about a user's career path or job fit, analyze their skills and experience (from UserSkills) and match them with job requirements (from JobSkills). Suggest the top 3 suitable jobs in a "suggestedJobs" field for the user, along with a short reasoning.
     `;
 
     // Call the AI model
@@ -131,6 +159,16 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
     Applications:
     ${JSON.stringify(allApplications, null, 2)}
 
+
+    Skills:
+  ${JSON.stringify(allSkills, null, 2)}
+
+  UserSkills:
+  ${JSON.stringify(allUserSkills, null, 2)}
+
+  JobSkills:
+  ${JSON.stringify(allJobSkills, null, 2)}
+
     And the AI's answer: "${cleanedResponse}"
 
     Identify any users, jobs, or applications mentioned in the AI's answer and return their details as a JSON array of user, job, or application objects. If none are mentioned, return an empty array.`;
@@ -144,7 +182,9 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
       const extractedData = JSON.parse(extractionText);
       relevantUsers = extractedData.filter((item: any) => item.type === "user");
       relevantJobs = extractedData.filter((item: any) => item.type === "job");
-      relevantApplications = extractedData.filter((item: any) => item.type === "application");
+      relevantApplications = extractedData.filter(
+        (item: any) => item.type === "application"
+      );
     } catch (error) {
       console.error("Error parsing extracted data:", error);
       relevantUsers = [];
@@ -166,8 +206,8 @@ export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
 
 // Function to clean the response text
 const cleanResponse = (text: string) => {
-  let cleanedText = text.replace(/[/*]/g, '');
+  let cleanedText = text.replace(/[/*]/g, "");
   cleanedText = cleanedText.trim();
-  cleanedText = cleanedText.replace(/\n+/g, '\n').replace(/\s+/g, ' ');
+  cleanedText = cleanedText.replace(/\n+/g, "\n").replace(/\s+/g, " ");
   return cleanedText;
 };

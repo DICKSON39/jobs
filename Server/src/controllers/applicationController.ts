@@ -64,9 +64,10 @@ export const getApplicationsByUserId = asyncHandler(async (req: Request, res: Re
 
   try {
     const result = await pool.query(
-      "SELECT * FROM application WHERE userId = $1",
+      "SELECT * FROM application WHERE user_id = $1",
       [parsedUserId]
     );
+    
 
     res.status(200).json(result.rows);
   } catch (error) {

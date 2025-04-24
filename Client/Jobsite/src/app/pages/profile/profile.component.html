@@ -1,0 +1,24 @@
+<div class="user-profile">
+    <h2>{{ userName }}'s Profile</h2>
+  
+    <div class="profile-card">
+      <h3>Uploaded CVs</h3>
+      <ul *ngIf="cvs.length; else noCvs">
+        <li *ngFor="let cv of cvs">
+          <strong>{{ cv.title }}</strong> - Uploaded on {{ cv.created_at | date }}
+        </li>
+      </ul>
+      <ng-template #noCvs><p>No CVs uploaded.</p></ng-template>
+    </div>
+  
+    <div class="profile-card">
+      <h3>Skills</h3>
+      <ul *ngIf="skills.length; else noSkills">
+        <li *ngFor="let skill of skills">
+          {{ skill.skillName }} - {{ skill.yearsExperience }} year(s)
+        </li>
+      </ul>
+      <ng-template #noSkills><p>No skills added.</p></ng-template>
+    </div>
+  </div>
+  

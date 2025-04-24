@@ -31,10 +31,10 @@ try {
     //console.log("✅ Token decoded:", decoded);
 
     const userQuery = await pool.query(
-        `SELECT users.id, users.name, users.email, users.role_id, ur.role_name
-         FROM users 
-         JOIN user_role ur ON users.role_id = ur.role_id 
-         WHERE users.user_id = $1`,
+        `SELECT user.id, user.name, user.email, user.role_id, ur.role_name
+         FROM user 
+         JOIN user_role ur ON user.role_id = ur.role_id 
+         WHERE user.user_id = $1`,
         [decoded.userId]
     );
     

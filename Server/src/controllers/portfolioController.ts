@@ -1,91 +1,75 @@
-import {Request,Response} from 'express';
-import pool from '../config/db.config';
-import { asyncHandler } from '../middlewares/asyncHandler';
+import { Request, Response } from "express";
+import { asyncHandler } from "../middlewares/asyncHandler";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
 
+import { AppDataSource } from "../config/data-source";
+import { User } from "../entity/User";
+import { Application } from "../entity/Apllication";
+import { Job } from "../entity/Job";
+import { Skill } from "../entity/Skill";
+import { UserSkill } from "../entity/UserSkill";
+import { JobSkill } from "../entity/JobSkill";
 
-export const getAllPortfolio = asyncHandler(async(req:Request,res:Response)=> {
-    const result = await pool.query("SELECT * FROM portfolio")
-    res.status(200).json(result.rows);
-})
+dotenv.config();
 
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-export const getAllPortfolioById = asyncHandler(async(req:Request,res:Response)=> {
-    const portfolioId = parseInt(req.params.id);
-    if (isNaN(portfolioId)) {
-       res.status(400).json({ error: 'Invalid portfolio ID' });
-       return;
-    }
+export const aiPrompt = asyncHandler(async (req: Request, res: Response) => {
+  const { question } = req.body;
 
-    const result = await pool.query ('SELECT * FROM portfolio WHERE id = $1', [portfolioId]);
-    if (result.rows.length > 0) {
-      res.status(200).json(result.rows[0]);
-    } else {
-      res.status(404).json({ message: 'Portfolio not found' });
-    }
-})
+  try {
+    const [users, applications, jobs, skills, userSkills, jobSkills] = await Promise.all([
+      AppDataSource.getRepository(User).find({ relations: ["role", "skills"] }),
+      AppDataSource.getRepository(Application).find({ relations: ["user", "job"] }),
+      AppDataSource.getRepository(Job).find({ relations: ["recruiter", "skills", "applications"] }),
+      AppDataSource.getRepository(Skill).find({ relations: ["userSkills", "jobSkills"] }),
+      AppDataSource.getRepository(UserSkill).find({ relations: ["user", "skill"] }),
+      AppDataSource.getRepository(JobSkill).find({ relations: ["job", "skill"] }),
+    ]);
 
+    const prompt = `
+I have the following data:
 
-export const createPortFolio = asyncHandler(async(req:Request,res:Response)=> {
-    const { title, description, projectUrl, userId } = req.body;
-  if (!title || !description || !projectUrl || !userId) {
-     res.status(400).json({ error: 'Missing required fields' });
-     return;
+Users:
+${JSON.stringify(users, null, 2)}
+
+Skills:
+${JSON.stringify(skills, null, 2)}
+
+User Skills:
+${JSON.stringify(userSkills, null, 2)}
+
+Job Skills:
+${JSON.stringify(jobSkills, null, 2)}
+
+Jobs:
+${JSON.stringify(jobs, null, 2)}
+
+Applications:
+${JSON.stringify(applications, null, 2)}
+
+Question: "${question}"
+
+Using this data, suggest a career path for the user if asked. Consider skills and experience (from UserSkill) to match them with appropriate JobSkill requirements. Return clear, structured advice.
+    `;
+
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const aiTextResponse = response.text();
+
+    res.status(200).json({
+      question,
+      aiResponse: cleanResponse(aiTextResponse),
+    });
+
+  } catch (error) {
+    console.error("AI Prompt Error:", error);
+    res.status(500).json({ error: "Failed to generate response." });
   }
-  const result = await pool.query(
-    'INSERT INTO portfolio (title, description, projectUrl, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
-    [title, description, projectUrl, userId]
-  );
-  res.status(201).json(result.rows[0]);
-})
+});
 
-export const updatePortfolio = asyncHandler(async(req:Request,res:Response)=> {
-    const portfolioId = parseInt(req.params.id);
-    const { title, description, projectUrl, userId } = req.body;
-    if (isNaN(portfolioId)) {
-       res.status(400).json({ error: 'Invalid portfolio ID' });
-       return
-    }
-    if (!title || !description || !projectUrl || !userId) {
-       res.status(400).json({ error: 'Missing required fields' });
-       return
-    }
-
-    const result = await pool.query(
-        'UPDATE portfolio SET title = $1, description = $2, projectUrl = $3, user_id = $4 WHERE id = $5 RETURNING *',
-        [title, description, projectUrl, userId, portfolioId]
-      );
-      if (result.rows.length > 0) {
-        res.status(200).json(result.rows[0]);
-        return;
-      } else {
-        res.status(404).json({ message: 'Portfolio not found' });
-        return;
-      }
-})
-
-export const deletePortfolio = asyncHandler(async(req:Request,res:Response)=> {
-    const portfolioId = parseInt(req.params.id);
-  if (isNaN(portfolioId)) {
-     res.status(400).json({ error: 'Invalid portfolio ID' });
-     return;
-  }
-
-  const result = await pool.query('DELETE FROM portfolio WHERE id = $1 RETURNING id', [portfolioId]);
-    if (result.rows.length > 0) {
-      res.status(200).json({ message: `Portfolio with ID ${portfolioId} deleted successfully` });
-    } else {
-      res.status(404).json({ message: 'Portfolio not found' });
-    }
-})
-
-
-export const getAllPortfolioByUser = asyncHandler(async(req:Request,res:Response)=> {
-    const userId = parseInt(req.params.userId);
-    if (isNaN(userId)) {
-       res.status(400).json({ error: 'Invalid user ID' });
-       return;
-    }
-
-    const result = await pool.query('SELECT * FROM portfolio WHERE user_id = $1', [userId]);
-    res.status(200).json(result.rows);
-})
+const cleanResponse = (text: string) => {
+  return text.replace(/[/*]/g, '').trim().replace(/\n+/g, '\n').replace(/\s+/g, ' ');
+};

@@ -23,6 +23,7 @@ import { AdminSecurityComponent } from './pages/admin-security/admin-security.co
 import { MonitoringAiComponent } from './pages/monitoring-ai/monitoring-ai.component';
 import { JobDetailsComponent } from './pages/job-details/job-details.component';
 import { ShowSkillsComponent } from './pages/show-skills/show-skills.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     {path: '', component: LandingPageComponent},
@@ -50,6 +51,7 @@ export const routes: Routes = [
     {path: 'job/:id',component: JobDetailsComponent},
     {path:'job-detail/:id',component:JobDetailsComponent},
     {path:'user/user-skills/:id',component:ShowSkillsComponent},
+    {path:'user-profile/:userId', component:ProfileComponent}
     
 
    

@@ -27,7 +27,7 @@ export const getInterviewById = asyncHandler(async(req:Request,res:Response)=>{
 
 export const createInterview = asyncHandler(async (req: Request, res: Response) => {
   const { applicationId, scheduledDate, status = 'scheduled', notes } = req.body;
-  console.log('📦 Received interview:', { applicationId, scheduledDate, status, notes });
+  //console.log('📦 Received interview:', { applicationId, scheduledDate, status, notes });
 
   // Check if applicationId and scheduledDate are provided
   if (!applicationId || !scheduledDate) {
@@ -97,12 +97,108 @@ export const deleteInterView = asyncHandler(async(req:Request,res:Response)=> {
 
 })
 
-export const getInterviewsByApplication = asyncHandler(async(req:Request,res:Response)=>{
-    const applicationId = parseInt(req.params.applicationId);
-  if (isNaN(applicationId)) {
-     res.status(400).json({ error: 'Invalid Application ID' });
-     return;
+// export const g = asyncHandler(async(req:Request,res:Response)=>{
+//     const applicationId = parseInt(req.params.applicationId);
+//   if (isNaN(applicationId)) {
+//      res.status(400).json({ error: 'Invalid Application ID' });
+//      return;
+//   }
+//   const result = await pool.query('SELECT * FROM interview WHERE application_id = $1', [applicationId]);
+//   res.status(200).json(result.rows);
+// });
+
+export const getInterviewsByApplication = asyncHandler(async (req: Request, res: Response) => {
+  console.log('Raw userId param:', req.params.userId); // Debugging line
+
+  const userId = parseInt(req.params.userId);
+  if (isNaN(userId)) {
+    res.status(400).json({ error: 'Invalid User ID' });
+    return;
   }
-  const result = await pool.query('SELECT * FROM interview WHERE application_id = $1', [applicationId]);
+
+  try {
+    // Correct SQL to get interviews by user_id (use user_id for consistency)
+    const result = await pool.query(
+      `SELECT i.* 
+       FROM interview i
+       JOIN application a ON i.application_id = a.id
+       WHERE a.user_id = $1`, // Make sure the column name is user_id, not userId
+      [userId]
+    );
+
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error("Error fetching interviews:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+
+
+export const getUserProfileDetails = asyncHandler(async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId);
+  if (isNaN(userId)) {
+    res.status(400).json({ error: 'Invalid User ID' });
+    return;
+  }
+
+  // Get CVs
+  const cvResult = await pool.query('SELECT * FROM cv WHERE user_id = $1', [userId]);
+
+  // Get Skills
+  const skillsResult = await pool.query(`
+    SELECT 
+      s.name AS "skillName", 
+      us."yearsExperience"
+    FROM user_skill us
+    JOIN skill s ON us."skillId" = s.id
+    WHERE us."userId" = $1
+  `, [userId]);
+
+  // Optional: get user name (if you want to include it in the response)
+  const userResult = await pool.query('SELECT name FROM "user" WHERE id = $1', [userId]);
+  const userName = userResult.rows[0]?.name || null;
+
+  // Combine the results
+  res.status(200).json({
+    userId,
+    userName,
+    cvs: cvResult.rows,
+    skills: skillsResult.rows
+  });
+});
+
+
+
+export const getUserInterviewNotifications = asyncHandler(async (req: Request, res: Response) => {
+  const userId = parseInt(req.params.userId);
+  if (isNaN(userId)) {
+    res.status(400).json({ error: 'Invalid User ID' });
+    return
+  }
+
+  const result = await pool.query(`
+    SELECT 
+      i.id AS "interviewId",
+      i.scheduled_at AS "scheduledAt",
+      i.location,
+      i.mode,
+
+      j.title AS "jobTitle",
+      j.company,
+
+      r.name AS "recruiterName",
+      r.email AS "recruiterEmail"
+
+    FROM interview i
+    JOIN application a ON i.application_id = a.id
+    JOIN job j ON a.job_id = j.id
+    LEFT JOIN "user" r ON j.recruiterid = r.id
+    WHERE a.user_id = $1
+    ORDER BY i.scheduled_at DESC
+  `, [userId]);
+
   res.status(200).json(result.rows);
 });

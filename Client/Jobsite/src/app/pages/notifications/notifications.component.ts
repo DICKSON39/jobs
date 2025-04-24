@@ -1,74 +1,26 @@
-import { CommonModule } from '@angular/common';
-import { Component,OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { InterviewService } from '../../services/interview.service';
-import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-notifications',
-  imports: [FormsModule,CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './notifications.component.html',
-  styleUrl: './notifications.component.css'
+  styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
+  notifications: any[] = [];
+  userId!: number; // Declare userId as a number and assert definite assignment
 
-  interviews: any[] = [];
-  applicationId!: number;
-  notificationMessage: string = '';
-  unreadCount: number = 0;
+  constructor(private interviewService: InterviewService, private authService: AuthService) {}
 
-  
-  constructor(private interViewService:InterviewService,
-    private route:ActivatedRoute
-  ) {}
-
- ngOnInit(): void {
-     this.applicationId = parseInt(this.route.snapshot.paramMap.get('applicationId') || '0')
-     console.log('Application ID:', this.applicationId);
-
-     if (this.applicationId) {
-      this.interViewService
-      .getInterviewsByApplication(this.applicationId)
-      .subscribe({
-        next: (data) => {
-          console.log('Fetched Interviews:', data);
-          this.interviews = data
-          this.checkForScheduledInterviews();
-        },
-        error: (err) => {
-          console.error('Failed To fetch Interviews',err)
-        }
-      })
-     }
- }
-
- 
-
-  // Check for a scheduled interview and set the message accordingly
-  checkForScheduledInterviews() {
-    const scheduledInterview = this.interviews.find(interview => interview.status?.toLowerCase() === 'scheduled');
-    
-    if (scheduledInterview) {
-      // If interview is scheduled, show a notification message
-      this.notificationMessage = 'Your interview has been scheduled for next week. Please check your email for details.';
-      this.unreadCount=1
-    } else {
-      // If no interview is scheduled, show a default message or nothing
-      this.notificationMessage = '';
-      this.unreadCount = 0;
-    }
+  ngOnInit(): void {
+    this.userId = this.authService.getCurrentUser(); // Call the method to get the user ID
+    this.interviewService.getInterviewById(this.userId).subscribe({
+      next: (data) => this.notifications = data,
+      error: (err) => console.error('Error loading interviews:', err)
+    });
   }
-
-  markAsRead() {
-    this.notificationMessage = '';  // Clear notification message
-    this.unreadCount = 0;  // Set unread count to 0
-  }
-
-  // Mark all notifications as read
-  markAllAsRead() {
-    this.notificationMessage = '';  // Clear all notifications
-    this.unreadCount = 0;
-    // Optionally, you can save this status to the backend if needed
-  }
-
 }
